@@ -1,0 +1,241 @@
+{
+    "emptyTable": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:50vh\"><div style=\"width:200px;margin-bottom: 20px\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 120 118\"><path d=\"M8.916,94.745C-.318,79.153-2.164,58.569,2.382,40.578,7.155,21.69,19.045,9.451,35.162,4.32,46.609.676,58.716.331,70.456,1.845,84.683,3.68,99.57,8.694,108.892,21.408c10.03,13.679,12.071,34.71,10.747,52.054-1.173,15.359-7.441,27.489-19.231,34.494-10.689,6.351-22.92,8.733-34.715,10.331-16.181,2.192-34.195-.336-47.6-12.281A47.243,47.243,0,0,1,8.916,94.745Z\" transform=\"translate(0 -1)\" fill=\"#f6faff\"></path><rect x=\"18\" y=\"32\" width=\"84\" height=\"50\" rx=\"4\" ry=\"4\" fill=\"#fff\"></rect><rect x=\"26\" y=\"44\" width=\"20\" height=\"12\" rx=\"1\" ry=\"1\" fill=\"#e5effe\"></rect><rect x=\"50\" y=\"44\" width=\"20\" height=\"12\" rx=\"1\" ry=\"1\" fill=\"#e5effe\"></rect><rect x=\"74\" y=\"44\" width=\"20\" height=\"12\" rx=\"1\" ry=\"1\" fill=\"#e5effe\"></rect><rect x=\"38\" y=\"60\" width=\"20\" height=\"12\" rx=\"1\" ry=\"1\" fill=\"#e5effe\"></rect><rect x=\"62\" y=\"60\" width=\"20\" height=\"12\" rx=\"1\" ry=\"1\" fill=\"#e5effe\"></rect><path d=\"M98,32H22a5.006,5.006,0,0,0-5,5V79a5.006,5.006,0,0,0,5,5H52v8H45a2,2,0,0,0-2,2v4a2,2,0,0,0,2,2H73a2,2,0,0,0,2-2V94a2,2,0,0,0-2-2H66V84H98a5.006,5.006,0,0,0,5-5V37A5.006,5.006,0,0,0,98,32ZM73,94v4H45V94Zm-9-2H54V84H64Zm37-13a3,3,0,0,1-3,3H22a3,3,0,0,1-3-3V37a3,3,0,0,1,3-3H98a3,3,0,0,1,3,3Z\" transform=\"translate(0 -1)\" fill=\"#798bff\"></path><path d=\"M61.444,41H40.111L33,48.143V19.7A3.632,3.632,0,0,1,36.556,16H61.444A3.632,3.632,0,0,1,65,19.7V37.3A3.632,3.632,0,0,1,61.444,41Z\" transform=\"translate(0 -1)\" fill=\"#6576ff\"></path><path d=\"M61.444,41H40.111L33,48.143V19.7A3.632,3.632,0,0,1,36.556,16H61.444A3.632,3.632,0,0,1,65,19.7V37.3A3.632,3.632,0,0,1,61.444,41Z\" transform=\"translate(0 -1)\" fill=\"none\" stroke=\"#6576ff\" stroke-miterlimit=\"10\" stroke-width=\"2\"></path><line x1=\"40\" y1=\"22\" x2=\"57\" y2=\"22\" fill=\"none\" stroke=\"#fffffe\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"></line><line x1=\"40\" y1=\"27\" x2=\"57\" y2=\"27\" fill=\"none\" stroke=\"#fffffe\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"></line><line x1=\"40\" y1=\"32\" x2=\"50\" y2=\"32\" fill=\"none\" stroke=\"#fffffe\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"></line><line x1=\"30.5\" y1=\"87.5\" x2=\"30.5\" y2=\"91.5\" fill=\"none\" stroke=\"#9cabff\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></line><line x1=\"28.5\" y1=\"89.5\" x2=\"32.5\" y2=\"89.5\" fill=\"none\" stroke=\"#9cabff\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></line><line x1=\"79.5\" y1=\"22.5\" x2=\"79.5\" y2=\"26.5\" fill=\"none\" stroke=\"#9cabff\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></line><line x1=\"77.5\" y1=\"24.5\" x2=\"81.5\" y2=\"24.5\" fill=\"none\" stroke=\"#9cabff\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></line><circle cx=\"90.5\" cy=\"97.5\" r=\"3\" fill=\"none\" stroke=\"#9cabff\" stroke-miterlimit=\"10\"></circle><circle cx=\"24\" cy=\"23\" r=\"2.5\" fill=\"none\" stroke=\"#9cabff\" stroke-miterlimit=\"10\"></circle></svg></div><h6>Aucune donnée disponible dans le tableau</h6></div>",
+    "loadingRecords": "Chargement...",
+    "processing": "Traitement...",
+    "aria": {
+        "sortAscending": ": activer pour trier la colonne par ordre croissant",
+        "sortDescending": ": activer pour trier la colonne par ordre décroissant"
+    },
+    "select": {
+        "rows": {
+            "_": "%d lignes sélectionnées",
+            "1": "1 ligne sélectionnée"
+        },
+        "cells": {
+            "1": "1 cellule sélectionnée",
+            "_": "%d cellules sélectionnées"
+        },
+        "columns": {
+            "1": "1 colonne sélectionnée",
+            "_": "%d colonnes sélectionnées"
+        }
+    },
+    "autoFill": {
+        "cancel": "Annuler",
+        "fill": "Remplir toutes les cellules avec <i>%d<\/i>",
+        "fillHorizontal": "Remplir les cellules horizontalement",
+        "fillVertical": "Remplir les cellules verticalement"
+    },
+    "searchBuilder": {
+        "conditions": {
+            "date": {
+                "after": "Après le",
+                "before": "Avant le",
+                "between": "Entre",
+                "empty": "Vide",
+                "not": "Différent de",
+                "notBetween": "Pas entre",
+                "notEmpty": "Non vide",
+                "equals": "Égal à"
+            },
+            "number": {
+                "between": "Entre",
+                "empty": "Vide",
+                "gt": "Supérieur à",
+                "gte": "Supérieur ou égal à",
+                "lt": "Inférieur à",
+                "lte": "Inférieur ou égal à",
+                "not": "Différent de",
+                "notBetween": "Pas entre",
+                "notEmpty": "Non vide",
+                "equals": "Égal à"
+            },
+            "string": {
+                "contains": "Contient",
+                "empty": "Vide",
+                "endsWith": "Se termine par",
+                "not": "Différent de",
+                "notEmpty": "Non vide",
+                "startsWith": "Commence par",
+                "equals": "Égal à",
+                "notContains": "Ne contient pas",
+                "notEnds": "Ne termine pas par",
+                "notStarts": "Ne commence pas par"
+            },
+            "array": {
+                "empty": "Vide",
+                "contains": "Contient",
+                "not": "Différent de",
+                "notEmpty": "Non vide",
+                "without": "Sans",
+                "equals": "Égal à"
+            }
+        },
+        "add": "Ajouter une condition",
+        "button": {
+            "0": "Recherche avancée",
+            "_": "Recherche avancée (%d)"
+        },
+        "clearAll": "Effacer tout",
+        "condition": "Condition",
+        "data": "Donnée",
+        "deleteTitle": "Supprimer la règle de filtrage",
+        "logicAnd": "Et",
+        "logicOr": "Ou",
+        "title": {
+            "0": "Recherche avancée",
+            "_": "Recherche avancée (%d)"
+        },
+        "value": "Valeur"
+    },
+    "searchPanes": {
+        "clearMessage": "Effacer tout",
+        "count": "{total}",
+        "title": "Filtres actifs - %d",
+        "collapse": {
+            "0": "Volet de recherche",
+            "_": "Volet de recherche (%d)"
+        },
+        "countFiltered": "{shown} ({total})",
+        "emptyPanes": "Pas de volet de recherche",
+        "loadMessage": "Chargement du volet de recherche...",
+        "collapseMessage": "Réduire tout",
+        "showMessage": "Montrer tout"
+    },
+    "buttons": {
+        "collection": "Collection",
+        "colvis": "Visibilité colonnes",
+        "colvisRestore": "Rétablir visibilité",
+        "copy": "Copier",
+        "copySuccess": {
+            "1": "1 ligne copiée dans le presse-papier",
+            "_": "%ds lignes copiées dans le presse-papier"
+        },
+        "copyTitle": "Copier dans le presse-papier",
+        "csv": "CSV",
+        "excel": "Excel",
+        "pageLength": {
+            "-1": "Afficher toutes les lignes",
+            "_": "Afficher %d lignes"
+        },
+        "pdf": "PDF",
+        "print": "Imprimer",
+        "copyKeys": "Appuyez sur ctrl ou u2318 + C pour copier les données du tableau dans votre presse-papier.",
+        "createState": "Créer un état",
+        "removeAllStates": "Supprimer tous les états",
+        "removeState": "Supprimer",
+        "renameState": "Renommer",
+        "savedStates": "États sauvegardés",
+        "stateRestore": "État %d",
+        "updateState": "Mettre à jour"
+    },
+    "decimal": ",",
+    "search": "Rechercher:",
+    "datetime": {
+        "previous": "Précédent",
+        "next": "Suivant",
+        "hours": "Heures",
+        "minutes": "Minutes",
+        "seconds": "Secondes",
+        "unknown": "-",
+        "amPm": [
+            "am",
+            "pm"
+        ],
+        "months": {
+            "0": "Janvier",
+            "2": "Mars",
+            "3": "Avril",
+            "4": "Mai",
+            "5": "Juin",
+            "6": "Juillet",
+            "8": "Septembre",
+            "9": "Octobre",
+            "10": "Novembre",
+            "1": "Février",
+            "11": "Décembre",
+            "7": "Août"
+        },
+        "weekdays": [
+            "Dim",
+            "Lun",
+            "Mar",
+            "Mer",
+            "Jeu",
+            "Ven",
+            "Sam"
+        ]
+    },
+    "editor": {
+        "close": "Fermer",
+        "create": {
+            "title": "Créer une nouvelle entrée",
+            "button": "Nouveau",
+            "submit": "Créer"
+        },
+        "edit": {
+            "button": "Editer",
+            "title": "Editer Entrée",
+            "submit": "Mettre à jour"
+        },
+        "remove": {
+            "button": "Supprimer",
+            "title": "Supprimer",
+            "submit": "Supprimer",
+            "confirm": {
+                "_": "Êtes-vous sûr de vouloir supprimer %d lignes ?",
+                "1": "Êtes-vous sûr de vouloir supprimer 1 ligne ?"
+            }
+        },
+        "multi": {
+            "title": "Valeurs multiples",
+            "info": "Les éléments sélectionnés contiennent différentes valeurs pour cette entrée. Pour modifier et définir tous les éléments de cette entrée à la même valeur, cliquez ou tapez ici, sinon ils conserveront leurs valeurs individuelles.",
+            "restore": "Annuler les modifications",
+            "noMulti": "Ce champ peut être modifié individuellement, mais ne fait pas partie d'un groupe. "
+        },
+        "error": {
+            "system": "Une erreur système s'est produite (<a target=\"\\\" rel=\"nofollow\" href=\"\\\">Plus d'information<\/a>)."
+        }
+    },
+    "stateRestore": {
+        "removeSubmit": "Supprimer",
+        "creationModal": {
+            "button": "Créer",
+            "order": "Tri",
+            "paging": "Pagination",
+            "scroller": "Position du défilement",
+            "search": "Recherche",
+            "select": "Sélection",
+            "columns": {
+                "search": "Recherche par colonne",
+                "visible": "Visibilité des colonnes"
+            },
+            "name": "Nom :",
+            "searchBuilder": "Recherche avancée",
+            "title": "Créer un nouvel état",
+            "toggleLabel": "Inclus :"
+        },
+        "renameButton": "Renommer",
+        "duplicateError": "Il existe déjà un état avec ce nom.",
+        "emptyError": "Le nom ne peut pas être vide.",
+        "emptyStates": "Aucun état sauvegardé",
+        "removeConfirm": "Voulez vous vraiment supprimer %s ?",
+        "removeError": "Échec de la suppression de l'état.",
+        "removeJoiner": "et",
+        "removeTitle": "Supprimer l'état",
+        "renameLabel": "Nouveau nom pour %s :",
+        "renameTitle": "Renommer l'état"
+    },
+    "info": "Affichage de _START_ à _END_ sur _TOTAL_ entrées",
+    "infoEmpty": "Affichage de 0 à 0 sur 0 entrées",
+    "infoFiltered": "(filtrées depuis un total de _MAX_ entrées)",
+    "lengthMenu": "Afficher _MENU_ entrées",
+    "paginate": {
+        "first": "Première",
+        "last": "Dernière",
+        "next": "Suivante",
+        "previous": "Précédente"
+    },
+    "zeroRecords": "<div style=\"display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:50vh\"><div style=\"width:200px;margin-bottom: 20px\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 120 118\"><path d=\"M8.916,94.745C-.318,79.153-2.164,58.569,2.382,40.578,7.155,21.69,19.045,9.451,35.162,4.32,46.609.676,58.716.331,70.456,1.845,84.683,3.68,99.57,8.694,108.892,21.408c10.03,13.679,12.071,34.71,10.747,52.054-1.173,15.359-7.441,27.489-19.231,34.494-10.689,6.351-22.92,8.733-34.715,10.331-16.181,2.192-34.195-.336-47.6-12.281A47.243,47.243,0,0,1,8.916,94.745Z\" transform=\"translate(0 -1)\" fill=\"#f6faff\"></path><rect x=\"18\" y=\"32\" width=\"84\" height=\"50\" rx=\"4\" ry=\"4\" fill=\"#fff\"></rect><rect x=\"26\" y=\"44\" width=\"20\" height=\"12\" rx=\"1\" ry=\"1\" fill=\"#e5effe\"></rect><rect x=\"50\" y=\"44\" width=\"20\" height=\"12\" rx=\"1\" ry=\"1\" fill=\"#e5effe\"></rect><rect x=\"74\" y=\"44\" width=\"20\" height=\"12\" rx=\"1\" ry=\"1\" fill=\"#e5effe\"></rect><rect x=\"38\" y=\"60\" width=\"20\" height=\"12\" rx=\"1\" ry=\"1\" fill=\"#e5effe\"></rect><rect x=\"62\" y=\"60\" width=\"20\" height=\"12\" rx=\"1\" ry=\"1\" fill=\"#e5effe\"></rect><path d=\"M98,32H22a5.006,5.006,0,0,0-5,5V79a5.006,5.006,0,0,0,5,5H52v8H45a2,2,0,0,0-2,2v4a2,2,0,0,0,2,2H73a2,2,0,0,0,2-2V94a2,2,0,0,0-2-2H66V84H98a5.006,5.006,0,0,0,5-5V37A5.006,5.006,0,0,0,98,32ZM73,94v4H45V94Zm-9-2H54V84H64Zm37-13a3,3,0,0,1-3,3H22a3,3,0,0,1-3-3V37a3,3,0,0,1,3-3H98a3,3,0,0,1,3,3Z\" transform=\"translate(0 -1)\" fill=\"#798bff\"></path><path d=\"M61.444,41H40.111L33,48.143V19.7A3.632,3.632,0,0,1,36.556,16H61.444A3.632,3.632,0,0,1,65,19.7V37.3A3.632,3.632,0,0,1,61.444,41Z\" transform=\"translate(0 -1)\" fill=\"#6576ff\"></path><path d=\"M61.444,41H40.111L33,48.143V19.7A3.632,3.632,0,0,1,36.556,16H61.444A3.632,3.632,0,0,1,65,19.7V37.3A3.632,3.632,0,0,1,61.444,41Z\" transform=\"translate(0 -1)\" fill=\"none\" stroke=\"#6576ff\" stroke-miterlimit=\"10\" stroke-width=\"2\"></path><line x1=\"40\" y1=\"22\" x2=\"57\" y2=\"22\" fill=\"none\" stroke=\"#fffffe\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"></line><line x1=\"40\" y1=\"27\" x2=\"57\" y2=\"27\" fill=\"none\" stroke=\"#fffffe\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"></line><line x1=\"40\" y1=\"32\" x2=\"50\" y2=\"32\" fill=\"none\" stroke=\"#fffffe\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"></line><line x1=\"30.5\" y1=\"87.5\" x2=\"30.5\" y2=\"91.5\" fill=\"none\" stroke=\"#9cabff\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></line><line x1=\"28.5\" y1=\"89.5\" x2=\"32.5\" y2=\"89.5\" fill=\"none\" stroke=\"#9cabff\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></line><line x1=\"79.5\" y1=\"22.5\" x2=\"79.5\" y2=\"26.5\" fill=\"none\" stroke=\"#9cabff\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></line><line x1=\"77.5\" y1=\"24.5\" x2=\"81.5\" y2=\"24.5\" fill=\"none\" stroke=\"#9cabff\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></line><circle cx=\"90.5\" cy=\"97.5\" r=\"3\" fill=\"none\" stroke=\"#9cabff\" stroke-miterlimit=\"10\"></circle><circle cx=\"24\" cy=\"23\" r=\"2.5\" fill=\"none\" stroke=\"#9cabff\" stroke-miterlimit=\"10\"></circle></svg></div><h6>Aucune entrée correspondante trouvée</h6>",
+    "thousands": " "
+}

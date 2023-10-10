@@ -1,0 +1,4 @@
+1 > docker cp dump.sql container_name:/path/to/dump.sql
+2 > docker exec -it container_name mysql -u your_username -p
+3 > use your_database_name;
+    source /path/to/dump.sql;
