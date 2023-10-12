@@ -42,6 +42,16 @@ class RegisterController extends Controller
     }
 
     /**
+     * Show the application's login form.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showRegistrationForm()
+    {
+        return view('clients.auth.register');
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
@@ -53,6 +63,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'confirm-password' => ['required', 'string','same:password' ]
         ]);
     }
 
@@ -64,6 +75,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $this->validator($data);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
