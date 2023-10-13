@@ -74,18 +74,18 @@
                     <div class="row g-2 mb-9">
                         <!-- First Name Field -->
                         <div class="col-md-8">
-                            <input class="form-control form-control-md" type="text" placeholder="First Name" name="first-name" autocomplete="off" data-kt-translate="sign-up-input-first-name" />
+                            <input class="form-control form-control-solid form-control-md" type="text" placeholder="{{ __("FullName") }}" name="fullName" autocomplete="off" data-kt-translate="sign-up-input-first-name" />
                         </div>
         
                         <!-- Last Name Field -->
                         <div class="col-md-4">
-                            <input class="form-control form-control-md " type="text" placeholder="CIN" name="cin" autocomplete="off"  />
+                            <input class="form-control form-control-md form-control-solid" type="text" placeholder="CINE" name="cine" autocomplete="off"  />
                         </div>
                        
                     </div>
                     <div class="row  mb-9">
                         <div class="col-md">
-                             <input type="email" placeholder="{{ __("Adresse E-mail") }}" name="email" class="form-control bg-transparent form-control-lg" />
+                             <input type="email" placeholder="{{ __("Adresse E-mail") }}" name="email" class="form-control form-control-solid form-control-lg" />
                         </div>
                     </div>
                     <div class="row  mb-9">
@@ -95,7 +95,7 @@
                             <div class="mb-1">
                                 <!--begin::Input wrapper-->
                                 <div class="position-relative mb-3">    
-                                    <input class="form-control form-control-md " type="password" placeholder="Password" name="password" autocomplete="off" data-kt-translate="sign-up-input-password"/>
+                                    <input class="form-control form-control-md form-control-solid" type="password" placeholder="{{ __("Password") }}" name="password" autocomplete="off" data-kt-translate="sign-up-input-password"/>
                     
                                     <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility">
                                         <i class="ki-outline ki-eye-slash fs-2"></i>                    <i class="ki-outline ki-eye fs-2 d-none"></i>                </span>
@@ -115,7 +115,7 @@
                     
                             <!--begin::Hint-->
                             <div class="text-muted" data-kt-translate="sign-up-hint">
-                                Use 8 or more characters with a mix of letters, numbers & symbols.
+                                {{ __("Use 8 or more characters with a mix of letters, numbers & symbols.") }}
                             </div>
                             <!--end::Hint-->
                         </div>
@@ -123,45 +123,95 @@
                     
                         <!--begin::Input group-->
                         <div class="fv-row mb-10"> 
-                            <input class="form-control form-control-md " type="password" placeholder="Confirm Password" name="confirm-password" autocomplete="off" data-kt-translate="sign-up-input-confirm-password" />
+                            <input class="form-control form-control-md form-control-solid" type="password" placeholder="{{__("Confirm Password")}}" name="confirm-password" autocomplete="off" data-kt-translate="sign-up-input-confirm-password" />
                         </div>
                     </div>
 
                     <div class="separator separator-content my-14">
                         <span class="text-gray-500 fw-semibold fs-7" style="width: 100%;">{{ __("Additional information") }}</span>
                     </div>
-
                     <div class="row g-2 mb-9">
-                        <!-- Additional Fields Go Here -->
-                        <div class="col-md-8">
-                            <input class="form-control form-control-md " type="text" placeholder="Store Name" name="storeName" autocomplete="off" data-kt-translate="sign-up-input-first-name" />
+                        <div class="col-md-6 col-lg-6">
+                            <div class="flex-row-fluid mb-8">
+                                <label class="required form-label">{{ __("Store Name") }}</label>
+                                <div class="position-relative">
+                                    <div class="d-flex position-absolute translate-middle-y top-50 start-0 ms-3">
+                                        <i class="ki-outline ki-shop fs-3"></i>
+                                    </div>
+                                    <input class="form-control form-control-solid ps-12" name="storeName" placeholder="{{ __("Store Name") }}" >
+                                </div>
+                            </div>
                         </div>
-        
-                        <div class="col-md-4">
-                            <select class="form-select form-control " aria-label="Select example">
-                                <option>Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                            {{-- <input class="form-control form-control-lg " type="text" placeholder="company Type" name="companyType" autocomplete="off"  /> --}}
+                        <div class="col-md-6 col-lg-6">
+                            <div class="flex-row-fluid mb-8">
+                                <label class="required form-label">{{ __("Company type") }}</label>
+                                <div class="position-relative">
+                                    <div class="d-flex position-absolute translate-middle-y top-50 start-0 ms-3">
+                                        <i class="ki-outline ki-route fs-3"></i>
+                                    </div>
+                                    <select class="form-select form-control form-control-solid" data-control="select2" aria-label="Select example">
+                                        <option>{{ __("Company type") }}</option>
+                                         @foreach ($companyTypes as $companyType)
+                                            <option value="{{$companyType->id}}">{{$companyType->name}}</option>
+                                         @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                           
                         </div>
-                       
                     </div>
                     <div class="row">
-                    <div class="col-md-6 col-lg-4">
-                        <div class="flex-row-fluid mb-8">
-                            <label class="required form-label">{{ __("Téléphone") }}</label>
-                            <div class="position-relative">
-                                <div class="d-flex position-absolute translate-middle-y top-50 start-0 ms-3">
-                                    <i class="ki-outline ki-whatsapp fs-3"></i>
+                        <div class="col-md-6 col-lg-6">
+                            <div class="flex-row-fluid mb-8">
+                                <label class="required form-label">{{ __("Site web") }}</label>
+                                <div class="position-relative">
+                                    <div class="d-flex position-absolute translate-middle-y top-50 start-0 ms-3">
+                                        <i class="ki-outline ki-click fs-3"></i>
+                                    </div>
+                                    <input class="form-control form-control-solid ps-12" name="parcel_phone" placeholder="{{ __("Site web") }}" id="phone_inputmask">
                                 </div>
-                                <input class="form-control form-control-solid ps-12" name="parcel_phone" placeholder="{{ __("Téléphone") }}" id="phone_inputmask">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6">
+                            <div class="flex-row-fluid mb-8">
+                                <label class="required form-label">{{ __("Phone Number") }}</label>
+                                <div class="position-relative">
+                                    <div class="d-flex position-absolute translate-middle-y top-50 start-0 ms-3">
+                                        <i class="ki-outline ki-whatsapp fs-3"></i>
+                                    </div>
+                                    <input class="form-control form-control-solid ps-12" name="parcel_phone" placeholder="{{ __("Phone Number") }}" id="phone_inputmask">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6">
+                            <div class="flex-row-fluid mb-8">
+                                <label class="required form-label">{{ __("City") }}</label>
+                                <div class="position-relative">
+                                    <div class="d-flex position-absolute translate-middle-y top-50 start-0 ms-3">
+                                        <i class="ki-outline ki-route fs-3"></i>
+                                    </div>
+                                    <select class="form-select form-control form-control-solid" data-control="select2" aria-label="Select example">
+                                        <option>{{ __("City") }}</option>
+                                         @foreach ($cities as $city)
+                                            <option value="{{$city->id}}">{{$city->name}}</option>
+                                         @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                           
+                        </div>
+                        <div class="col-md-6 col-lg-6">
+                            <div class="flex-row-fluid mb-8">
+                                <label class="form-label required">{{ __("Address") }}</label>
+                                <div class="position-relative">
+                                    <textarea name="address" class="form-control form-control-solid" placeholder="{{ __("Address") }}" data-kt-autosize="true" rows="4"></textarea>
+                                </div>
+                            </div>
+                          
+                        </div>
+                    </div>
                     <div class="d-grid mb-10">
                         <button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-success">
                             <!--begin::Indicator label-->

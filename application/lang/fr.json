@@ -526,6 +526,7 @@
     "Myanmar": "Myanmar",
     "N/A": "n.c.",
     "Name": "Nom",
+    "FullName": "Nom complet",
     "Namibia": "Namibie",
     "Nauru": "Nauru",
     "Nebraska": "Nebraska",
@@ -614,6 +615,7 @@
     "Papua New Guinea": "Papouasie-Nouvelle-Guinée",
     "Paraguay": "Paraguay",
     "Password": "Mot de passe",
+    "Use 8 or more characters with a mix of letters, numbers & symbols.": "Utilisez 8 caractères ou plus avec un mélange de lettres, de chiffres et de symboles.",
     "Payment Confirmation": "Confirmation de paiement",
     "Payment Information": "Informations de paiement",
     "Payment information updated successfully.": "Informations de paiement mises à jour avec succès.",
@@ -1123,5 +1125,10 @@
     "Zimbabwe": "Zimbabwe",
     "ZIP / Postal Code": "Code postal",
     "Zip / Postal Code": "Code postal",
-    "Åland Islands": "Les îles d'Åland"
+    "Åland Islands": "Les îles d'Åland",
+
+    "Store": "Magasin",
+    "Store Name": "Nom du magasin",
+    "Company type": "Type d'entereprise",
+    "Site web": "Site web"
 }

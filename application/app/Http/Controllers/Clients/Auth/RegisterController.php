@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Clients\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\City;
+use App\Models\CompanyType;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -48,7 +51,13 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        return view('clients.auth.register');
+        $cities = City::where('active', 1)->get(['id', 'name']);
+        $companyTypes = CompanyType::get(['id', 'name']);
+        return view('clients.auth.register', [
+                "cities" => $cities,
+                "companyTypes" => $companyTypes
+            ]
+        );
     }
 
     /**
@@ -73,9 +82,12 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    protected function register(Request $request)
     {
-        $this->validator($data);
+        var_dump("ok");
+        die();
+        // $this->validator($data);
+       
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
