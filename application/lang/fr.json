@@ -1136,6 +1136,18 @@
     "This account is not activated. check your inbox for email activation or Contact the support to send you email activation.": 
     "Ce compte n'est pas activé. Vérifiez votre boîte de réception pour l'activation par email ou contactez le support pour qu'il vous envoie un email d'activation.",
     "Account activation link sent to your e-mail address: :email Please follow the link inside to continue.":
-    "Lien d'activation du compte envoyé à votre adresse e-mail: :email Veuillez suivre le lien à l'intérieur pour continuer."
+    "Lien d'activation du compte envoyé à votre adresse e-mail: :email Veuillez suivre le lien à l'intérieur pour continuer.",
 
-}
+    "Request": "Demande",
+    "Collection": "Ramassage",
+    "Add Collection": "Ajouter une ramassage",
+    "List of Collection": "Liste des ramassages",
+    "Claims": "Réclamations",
+    "Add Claim": "Ajouter une réclamation",
+    "List of Claims": "Liste des réclamations",
+    "Object": "Objet",
+    "Creation Date": "Date de création",
+    "Parcel Code": "Code d'envoi",
+    "Modification": "Modification",
+    "Utilities": "Utilitaires"
+} 

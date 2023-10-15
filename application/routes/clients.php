@@ -128,5 +128,14 @@ Route::prefix('clients')->name('clients.')->group(function () {
             Route::post('update', 'update')->name('delivery-note.update');
             Route::delete('{id}', 'delete')->name('delivery-note.delete');
         });
+
+        // Requests
+        Route::group([
+            'prefix' => '/requests',
+            'as' => 'requests.',
+          ], function () {
+              Route::resource('pickups', \App\Http\Controllers\Clients\PickupRequestController::class);
+              Route::resource('claims', \App\Http\Controllers\Clients\ClaimRequestController::class);
+          });
     });
 });

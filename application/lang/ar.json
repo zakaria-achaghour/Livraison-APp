@@ -1171,6 +1171,19 @@
     "This account is not activated. check your inbox for email activation or Contact the support to send you email activation.":
     "لم يتم تنشيط هذا الحساب. تحقق من صندوق الوارد الخاص بك لتنشيط البريد الإلكتروني أو اتصل بالدعم لإرسال تنشيط البريد الإلكتروني إليك",
     "Account activation link sent to your e-mail address: :email Please follow the link inside to continue.": 
-    "م إرسال رابط تنشيط الحساب إلى عنوان بريدك الإلكتروني: :email يرجى اتباع الرابط الموجود بالداخل للمتابعة"
-    
+    "م إرسال رابط تنشيط الحساب إلى عنوان بريدك الإلكتروني: :email يرجى اتباع الرابط الموجود بالداخل للمتابعة",
+
+    "Request": "طلب",
+    "Collection": "تجميع",
+    "Add Collection": "إضافة تجميع",
+    "List of Collection": "لائحة تجميع",
+    "Claims": "مطالبات",
+    "Add Claim": "إضافة مطلب",
+    "List of Claims": "قائمة مطالبات",
+    "Object": "موضوع",
+    "Parcel Code": "رمزالطرد",
+    "Creation Date": "تاريخ الإنشاء",
+    "Modification": "تعديل",
+    "Utilities": "أدوات مساعدة" 
+
 }
