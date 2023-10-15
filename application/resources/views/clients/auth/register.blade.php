@@ -68,24 +68,52 @@
                 @endif
     
                 <!-- Registration Form -->
-                <form action="{{ route('clients.register') }}" class="form w-100" novalidate="novalidate" id="kt_sign_in_form" method="POST">
+                <form action="{{ route('clients.register') }}" 
+                class="form w-100" novalidate="novalidate" id="kt_sign_up_form" method="POST">
                     @csrf
                     <!-- Your form fields here -->
                     <div class="row g-2 mb-9">
                         <!-- First Name Field -->
                         <div class="col-md-8">
-                            <input class="form-control form-control-solid form-control-md" type="text" placeholder="{{ __("FullName") }}" name="fullName" autocomplete="off" data-kt-translate="sign-up-input-first-name" />
+                            <div class="flex-row-fluid mb-8">
+                                <label class="required form-label">{{ __("FullName") }}</label>
+                                <div class="position-relative">
+                                    <div class="d-flex position-absolute translate-middle-y top-50 start-0 ms-3">
+                                        <i class="ki-outline ki-user fs-3"></i>
+                                    </div>
+                                    <input class="form-control form-control-solid form-control-md ps-12"
+                                           type="text" placeholder="{{ __("FullName") }}" name="fullName" 
+                                           autocomplete="off" data-kt-translate="sign-up-input-first-name"
+                                           value="{{ old('fullName') }}" />
+                                </div>
+                            </div>
                         </div>
         
                         <!-- Last Name Field -->
                         <div class="col-md-4">
-                            <input class="form-control form-control-md form-control-solid" type="text" placeholder="CINE" name="cine" autocomplete="off"  />
+                            <div class="flex-row-fluid mb-8">
+                                <label class="form-label">{{ __("CINE") }}</label>
+                                <div class="position-relative">
+                                    <input class="form-control form-control-md form-control-solid ps-12"
+                                           type="text" placeholder="CINE" name="cine" autocomplete="off"
+                                           value="{{ old('cine') }}"/>
+                                </div>
+                            </div>
                         </div>
-                       
                     </div>
                     <div class="row  mb-9">
-                        <div class="col-md">
-                             <input type="email" placeholder="{{ __("Adresse E-mail") }}" name="email" class="form-control form-control-solid form-control-lg" />
+                        <div class="col-md">      
+                            <div class="flex-row-fluid mb-8">
+                                <label class="required form-label">{{ __("Adresse E-mail") }}</label>
+                                <div class="position-relative">
+                                    <div class="d-flex position-absolute translate-middle-y top-50 start-0 ms-3">
+                                        <i class="ki-outline ki-send fs-3"></i>
+                                    </div>
+                                    <input type="email" placeholder="{{ __("Adresse E-mail") }}" name="email" 
+                                           class="form-control form-control-solid form-control-md ps-12"
+                                           value="{{ old('email') }}"/>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row  mb-9">
@@ -123,7 +151,7 @@
                     
                         <!--begin::Input group-->
                         <div class="fv-row mb-10"> 
-                            <input class="form-control form-control-md form-control-solid" type="password" placeholder="{{__("Confirm Password")}}" name="confirm-password" autocomplete="off" data-kt-translate="sign-up-input-confirm-password" />
+                            <input class="form-control form-control-md form-control-solid" type="password" placeholder="{{__("Confirm Password")}}" name="password_confirmation" autocomplete="off" data-kt-translate="sign-up-input-confirm-password" />
                         </div>
                     </div>
 
@@ -138,7 +166,8 @@
                                     <div class="d-flex position-absolute translate-middle-y top-50 start-0 ms-3">
                                         <i class="ki-outline ki-shop fs-3"></i>
                                     </div>
-                                    <input class="form-control form-control-solid ps-12" name="storeName" placeholder="{{ __("Store Name") }}" >
+                                    <input class="form-control form-control-solid ps-12" name="storeName"
+                                           placeholder="{{ __("Store Name") }}" value="{{ old('storeName') }}" >
                                 </div>
                             </div>
                         </div>
@@ -149,26 +178,29 @@
                                     <div class="d-flex position-absolute translate-middle-y top-50 start-0 ms-3">
                                         <i class="ki-outline ki-route fs-3"></i>
                                     </div>
-                                    <select class="form-select form-control form-control-solid" data-control="select2" aria-label="Select example">
+                                    <select class="form-select form-control form-control-solid" name="companyType" data-control="select2" aria-label="Select example">
                                         <option>{{ __("Company type") }}</option>
                                          @foreach ($companyTypes as $companyType)
-                                            <option value="{{$companyType->id}}">{{$companyType->name}}</option>
+                                            <option value="{{$companyType->id}}" 
+                                                {{ old('companyType') == $companyType->id ? 'selected' : '' }}
+                                                >{{$companyType->name}}</option>
                                          @endforeach
                                     </select>
                                 </div>
                             </div>
-                           
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-lg-6">
                             <div class="flex-row-fluid mb-8">
-                                <label class="required form-label">{{ __("Site web") }}</label>
+                                <label class="form-label">{{ __("Site web") }}</label>
                                 <div class="position-relative">
                                     <div class="d-flex position-absolute translate-middle-y top-50 start-0 ms-3">
                                         <i class="ki-outline ki-click fs-3"></i>
                                     </div>
-                                    <input class="form-control form-control-solid ps-12" name="parcel_phone" placeholder="{{ __("Site web") }}" id="phone_inputmask">
+                                    <input class="form-control form-control-solid ps-12" name="siteWeb"
+                                           placeholder="{{ __("Site web") }}"
+                                           value="{{ old('siteWeb') }}">
                                 </div>
                             </div>
                         </div>
@@ -179,7 +211,8 @@
                                     <div class="d-flex position-absolute translate-middle-y top-50 start-0 ms-3">
                                         <i class="ki-outline ki-whatsapp fs-3"></i>
                                     </div>
-                                    <input class="form-control form-control-solid ps-12" name="parcel_phone" placeholder="{{ __("Phone Number") }}" id="phone_inputmask">
+                                    <input class="form-control form-control-solid ps-12" name="phone"
+                                    placeholder="{{ __("Phone Number") }}" value="{{ old('phone') }}">
                                 </div>
                             </div>
                         </div>
@@ -192,10 +225,13 @@
                                     <div class="d-flex position-absolute translate-middle-y top-50 start-0 ms-3">
                                         <i class="ki-outline ki-route fs-3"></i>
                                     </div>
-                                    <select class="form-select form-control form-control-solid" data-control="select2" aria-label="Select example">
+                                    <select class="form-select form-control form-control-solid" 
+                                            data-control="select2" aria-label="Select example" name="city">
                                         <option>{{ __("City") }}</option>
                                          @foreach ($cities as $city)
-                                            <option value="{{$city->id}}">{{$city->name}}</option>
+                                            <option value="{{$city->name}}"
+                                                {{ old('city') == $city->name ? 'selected' : '' }}
+                                                >{{$city->name}}</option>
                                          @endforeach
                                     </select>
                                 </div>
@@ -206,14 +242,15 @@
                             <div class="flex-row-fluid mb-8">
                                 <label class="form-label required">{{ __("Address") }}</label>
                                 <div class="position-relative">
-                                    <textarea name="address" class="form-control form-control-solid" placeholder="{{ __("Address") }}" data-kt-autosize="true" rows="4"></textarea>
+                                    <textarea name="address" class="form-control form-control-solid" placeholder="{{ __("Address") }}" data-kt-autosize="true" rows="4">
+                                        {{ old('address') }}
+                                    </textarea>
                                 </div>
                             </div>
-                          
                         </div>
                     </div>
                     <div class="d-grid mb-10">
-                        <button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-success">
+                        <button type="submit" id="kt_sign_up_submit" class="btn btn-lg btn-success">
                             <!--begin::Indicator label-->
                             <span class="indicator-label">{{ __("S'inscrire") }}</span>
                             <span class="indicator-progress">
@@ -276,8 +313,70 @@
     </script>
     <script src="{{ asset('assets/clients/plugins/global/plugins.bundle.js') }}"></script>
     <script src="{{ asset('assets/clients/js/scripts.bundle.js') }}"></script>
+    <script src="{{ asset('assets/clients/js/locale/validation_'.app()->getLocale().'.js') }}"></script>
+<script type="text/javascript">
+    KTUtil.onDOMContentLoaded((function() {
+        var form = document.querySelector("#kt_new_password_form");
+        var o = KTPasswordMeter.getInstance(form.querySelector('[data-kt-password-meter="true"]'));
+        var button = document.querySelector("#kt_new_password_submit")
 
-    @yield('js')
+
+        // Validation
+        var validation = FormValidation.formValidation(form, {
+            localization: current_locale == 'ar' ? ar_MA : fr_FR,
+            fields: {
+                "password": {
+                    validators: {
+                        notEmpty: {},
+                        callback: {
+                            callback: function(t) {
+                                if (t.value.length > 0) return o.getScore() == 100
+                            },
+                            message : '{{ __("Utilisez 8 caractères ou plus avec une combinaison de lettres, de chiffres et de symboles. (Exemple: Abcd@123") }}'
+                        }
+                    }
+                },
+                "password_confirmation": {
+                    validators: {
+                        notEmpty: {},
+                        identical: {
+                            compare: function() {
+                                return form.querySelector('[name="password"]').value
+                            },
+                        }
+                    }
+                }
+            },
+            plugins: {
+                trigger: new FormValidation.plugins.Trigger({
+                    event: {
+                        password: !1
+                    }
+                }),
+                bootstrap: new FormValidation.plugins.Bootstrap5({
+                    rowSelector: ".fv-row",
+                    eleInvalidClass: "",
+                    eleValidClass: ""
+                })
+            }
+        });
+
+        form.querySelector('input[name="password"]').addEventListener("input", (function() {
+            this.value.length > 0 && validation.updateFieldStatus("password", "NotValidated")
+        }));
+
+
+        button.addEventListener("click", function(e) {
+            e.preventDefault();
+            validation.revalidateField("password");
+            validation.validate().then(function(r) {
+                if(r == "Valid") {
+                    form.submit();
+                }
+            });
+        });
+    }));
+</script>
 </body>
 
 </html>

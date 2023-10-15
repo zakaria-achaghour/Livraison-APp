@@ -10,8 +10,7 @@ use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Auth\Access\AuthorizationException;
-
-
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 class VerificationController extends Controller
 {
@@ -26,14 +25,7 @@ class VerificationController extends Controller
     |
     */
 
-    use VerifiesEmails;
-
-    /**
-     * Where to redirect users after verification.
-     *
-     * @var string
-     */
-    protected $redirectTo = 'clients.verification.notice';
+   
 
     /**
      * Create a new controller instance.
@@ -47,6 +39,74 @@ class VerificationController extends Controller
         $this->middleware('throttle:6,1')->only('verify', 'resend');
     }
 
+    // public function show() {
+    //     return view('clients.auth.verify');
+    // }
+
+     /**
+     * Show the email verification notice.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Request $request)
+    {
+        return $request->user('clients')->hasVerifiedEmail()
+            ? redirect()->route('clients.home')
+            : view('clients.auth.verify');
+    }
+
+ /**
+     * Verfy the user email.
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function verify(Request $request)
+    {
+        if (! hash_equals((string) $request->user('clients')->getKey(), (string) $request->route('id'))) {
+            //id value doesn't match.
+            return redirect()
+                ->route('clients.verification.notice')
+                ->with('error','Invalid user!');
+        }
+
+        if ($request->user('clients')->hasVerifiedEmail()) {
+            return redirect()
+                ->route('clients.home');
+        }
+
+        $request->user('clients')->markEmailAsVerified();
+
+        return redirect()
+            ->route('clients.home')
+            ->with('status','Thank you for verifying your email!');
+    }
+
+    // public function verify(EmailVerificationRequest $request) {
+    //     $request->fulfill();
+     
+    //     return redirect('/clients');
+    // }
+
+     /**
+     * Resend the verification email.
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function resend(Request $request)
+    {
+        if ($request->user('clients')->hasVerifiedEmail()) {
+            return redirect()->route('clients.home');
+        }
+
+        $request->user('clients')->sendEmailVerificationNotification();
+
+        return redirect()
+            ->back()
+            ->with('status','We have sent you a verification email!');
+    }
 
     public function changeEmail(Request $request) {
         // GET CURRENT USER

@@ -1011,6 +1011,8 @@
     "Venezuela, Bolivarian Republic of": "فنزويلا",
     "Verify": "تحقق",
     "Verify Email Address": "التحقق من عنوان البريد الإلكتروني",
+    "Try Again": "حاول مرة أخرى ",
+    "Did’t receive an email?": "ألم تتلق بريدا إلكترونيا؟",
     "Verify Your Email Address": "تحقق من عنوان بريدك الإلكتروني",
     "Vermont": "فيرمونت",
     "Viet Nam": "فيتنام",
@@ -1165,6 +1167,10 @@
     "Store": "المتجر",
     "Store Name": "اسم المتجر",
     "Company type": "نوع الشركة",
-    "Site web": "موقع الويب"
+    "Site web": "موقع الويب",
+    "This account is not activated. check your inbox for email activation or Contact the support to send you email activation.":
+    "لم يتم تنشيط هذا الحساب. تحقق من صندوق الوارد الخاص بك لتنشيط البريد الإلكتروني أو اتصل بالدعم لإرسال تنشيط البريد الإلكتروني إليك",
+    "Account activation link sent to your e-mail address: :email Please follow the link inside to continue.": 
+    "م إرسال رابط تنشيط الحساب إلى عنوان بريدك الإلكتروني: :email يرجى اتباع الرابط الموجود بالداخل للمتابعة"
     
 }

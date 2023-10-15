@@ -1009,6 +1009,8 @@
     "Venezuela, Bolivarian Republic of": "Vénézuela",
     "Verify": "Vérifier",
     "Verify Email Address": "Vérifier l'adresse e-mail",
+    "Did’t receive an email?": "Vous n'avez pas reçu d'email ?",
+    "Try Again": "Réessayer",
     "Verify Your Email Address": "Vérifiez votre adresse e-mail",
     "Vermont": "Vermont",
     "Viet Nam": "Vietnam",
@@ -1130,5 +1132,10 @@
     "Store": "Magasin",
     "Store Name": "Nom du magasin",
     "Company type": "Type d'entereprise",
-    "Site web": "Site web"
+    "Site web": "Site web",
+    "This account is not activated. check your inbox for email activation or Contact the support to send you email activation.": 
+    "Ce compte n'est pas activé. Vérifiez votre boîte de réception pour l'activation par email ou contactez le support pour qu'il vous envoie un email d'activation.",
+    "Account activation link sent to your e-mail address: :email Please follow the link inside to continue.":
+    "Lien d'activation du compte envoyé à votre adresse e-mail: :email Veuillez suivre le lien à l'intérieur pour continuer."
+
 }
