@@ -42,7 +42,7 @@
             </div>
 
             <div class="d-flex align-self-center flex-center flex-shrink-0">
-                <a href="{{ route('clients.inventory.add') }}" class="btn btn-sm btn-success d-flex flex-center ms-3 px-4 py-3">
+                <a href="{{ route('clients.requests.pickups.create') }}" class="btn btn-sm btn-success d-flex flex-center ms-3 px-4 py-3">
                     <i class="ki-outline ki-plus-square fs-2"></i>
                     <span>{{ __("Add Collection") }}</span>
                 </a>

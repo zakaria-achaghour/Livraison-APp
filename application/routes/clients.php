@@ -137,5 +137,13 @@ Route::prefix('clients')->name('clients.')->group(function () {
               Route::resource('pickups', \App\Http\Controllers\Clients\PickupRequestController::class);
               Route::resource('claims', \App\Http\Controllers\Clients\ClaimRequestController::class);
           });
+
+          // utilities
+        Route::group([
+            'prefix' => '/utilities',
+            'as' => 'utilities.',
+          ], function () {
+              Route::resource('users', \App\Http\Controllers\Clients\CustomerController::class);
+          });
     });
 });

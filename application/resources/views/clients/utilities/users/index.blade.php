@@ -1,6 +1,6 @@
 @extends('clients.layouts.app')
 
-@section('title', __('Claims'))
+@section('title', __('Users'))
 
 @section('after_css')
     <link href="{{ asset("assets/clients/plugins/custom/datatables/datatables.bundle.css") }}" rel="stylesheet" type="text/css"/>
@@ -14,7 +14,7 @@
             <div class="d-flex flex-column flex-row-fluid">
                 <div class="page-title d-flex align-items-center me-3">
                     <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-lg-2x gap-2">
-                        <span>{{ __("List of Claims") }}</span>
+                        <span>{{ __("List of Users") }}</span>
                     </h1>
                 </div>
 
@@ -30,21 +30,21 @@
                     </li>
 
                     <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
-                        {{ __('Claims') }} 
+                        {{ __('Users') }} 
                     </li>
 
                     <li class="breadcrumb-item">
                         <i class="ki-outline ki-right fs-7 text-gray-700 mx-n1"></i> </li>
 
                     <li class="breadcrumb-item text-gray-700">
-                        {{ __("List of Claims") }} </li>
+                        {{ __("List of Users") }} </li>
                 </ul>
             </div>
 
             <div class="d-flex align-self-center flex-center flex-shrink-0">
-                <a href="{{ route('clients.requests.claims.create') }}" class="btn btn-sm btn-success d-flex flex-center ms-3 px-4 py-3">
+                <a href="{{ route('clients.inventory.add') }}" class="btn btn-sm btn-success d-flex flex-center ms-3 px-4 py-3">
                     <i class="ki-outline ki-plus-square fs-2"></i>
-                    <span>{{ __("Add Claim") }}</span>
+                    <span>{{ __("Add User") }}</span>
                 </a>
             </div>
         </div>
@@ -93,16 +93,18 @@
                             <i class="ki-outline ki-exit-up fs-2"></i> {{ __("Exporter") }}
                         </button>
                     </div>
+                    
+
                 </div>
             </div>
 
             <div class="card-body pt-0">
-                <table class="table table-respo has-checkbox align-middle table-row-bordered table-striped table-row-gray-300 fs-6 gy-5 datatable-browse" id="list_claims">
+                <table class="table table-respo has-checkbox align-middle table-row-bordered table-striped table-row-gray-300 fs-6 gy-5 datatable-browse" id="list_users">
                     <thead>
                         <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
                             <th class="w-10px pe-2">
                                 <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                    <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#list_claims .form-check-input" value="1" />
+                                    <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#list_users .form-check-input" value="1" />
                                 </div>
                             </th>
                             @php
@@ -113,10 +115,12 @@
                                 ];
                                 $columns = [
 						            ['data' => 'checkbox', 'orderable' => false, 'searchable' => false],
-						            ['data' => 'claims_object', 'name' => "claims_object", 'title' =>  __("Object")],
-                                    ['data' => 'parcel_code', 'name' => "parcel_code", 'title' =>  __("Parcel Code")],
-                                    ['data' => 'claims_statut', 'name' => "claims_statut", 'title' =>  __("Action Status")],
-                                    ['data' => 'claims_time', 'name' => "claims_time", 'title' =>  __("Creation Date")],
+						            ['data' => 'pickup_request_type', 'name' => "pickup_request_type", 'title' =>  __("Type")],
+                                    ['data' => 'pickup_request_statut', 'name' => "pickup_request_statut", 'title' =>  __("Status")],
+                                    ['data' => 'pickup_request_time', 'name' => "pickup_request_time", 'title' =>  __("Creation Date")],
+                                    ['data' => 'pickup_request_phone', 'name' => "pickup_request_phone", 'title' =>  __("Phone")],
+                                    ['data' => 'pickup_request_address', 'name' => "pickup_request_address", 'title' =>  __("Adress")],
+                                    ['data' => 'pickup_request_note', 'name' => "pickup_request_note", 'title' =>  __("Remarque")],
 						            ['data' => 'action', 'name' => 'action', 'title' => 'Actions', 'orderable' => false, 'searchable' => false],
 						        ];
                             @endphp
@@ -138,13 +142,13 @@
                             
                         </tr>
                     </thead>
-                    <tbody class="text-gray-600 fw-semibold" id="list_claims_body"></tbody>
+                    <tbody class="text-gray-600 fw-semibold" id="list_users_body"></tbody>
                 </table>
             </div>
         </div>
     </div>
-
 </div>
+
 
 @endsection
 

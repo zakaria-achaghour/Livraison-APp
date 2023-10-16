@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Clients;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class PickupRequestController extends Controller
+class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view("clients.requests.pickups.index");
+        return view("clients.utilities.users.index");
     }
 
     /**
@@ -20,7 +20,7 @@ class PickupRequestController extends Controller
      */
     public function create()
     {
-        return view("clients.requests.pickups.add");
+        //
     }
 
     /**
@@ -44,7 +44,7 @@ class PickupRequestController extends Controller
      */
     public function edit(string $id)
     {
-        return view("clients.requests.pickups.edit");
+        //
     }
 
     /**

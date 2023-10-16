@@ -20,7 +20,7 @@ class ClaimRequestController extends Controller
      */
     public function create()
     {
-        //
+        return view("clients.requests.claims.add");
     }
 
     /**
@@ -44,7 +44,7 @@ class ClaimRequestController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view("clients.requests.claims.edit");
     }
 
     /**

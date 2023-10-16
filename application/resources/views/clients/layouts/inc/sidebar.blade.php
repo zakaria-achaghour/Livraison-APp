@@ -204,7 +204,7 @@
                 <div class="app-sidebar-separator separator mx-4 mb-2"></div>
 
                 <div class="menu-item">
-                    <a class="menu-link fs-5 fw-bold" href="#">
+                    <a class="menu-link fs-5 fw-bold" href="{{ route('clients.utilities.users.index') }}">
                         <span class="menu-icon">
                             <i class="ki-duotone ki-people   fs-1"><i class="path1"></i><i class="path2"></i><i class="path3"></i></i>
                         </span>
@@ -222,12 +222,13 @@
                 </div>
 
                 <div class="menu-item">
-                    <a class="menu-link fs-5 fw-bold" href="#">
+                    <a class="menu-link fs-5 fw-bold" href="{{ route('clients.logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                         <span class="menu-icon">
                             <i class="bi bi-box-arrow-left fs-1"></i>
                         </span>
                         <span class="menu-title">{{ __("Logout") }}</span>
                     </a>
+                  
                 </div>
             </div>
         </div>
