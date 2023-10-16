@@ -92,14 +92,36 @@
                         <button type="button" class="btn btn-sm  btn-light-success me-3 excel-export" data-bs-toggle="modal" data-bs-target="#export_modal">
                             <i class="ki-outline ki-exit-up fs-2"></i> {{ __("Exporter") }}
                         </button>
+                        <button type="button" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"
+                                data-bs-target="#kt_modal_add_pickup">
+                                <i class="ki-outline ki-plus fs-2"></i> {{ __("Add Collection") }}
+                        </button>
                     </div>
-                    
-
                 </div>
             </div>
 
             <div class="card-body pt-0">
-                <table class="table table-respo has-checkbox align-middle table-row-bordered table-striped table-row-gray-300 fs-6 gy-5 datatable-browse" id="list_pickups">
+
+                @php
+                $default_column = [
+                    'visible' => true,
+                    'orderable' => true,
+                    'searchable' => true
+                ];
+                $columns = [
+                    ['data' => 'checkbox', 'orderable' => false, 'searchable' => false],
+                    ['data' => 'pickup_request_type', 'name' => "pickup_request_type", 'title' =>  __("Type")],
+                    ['data' => 'pickup_request_statut', 'name' => "pickup_request_statut", 'title' =>  __("Status")],
+                    ['data' => 'pickup_request_time', 'name' => "pickup_request_time", 'title' =>  __("Creation Date")],
+                    ['data' => 'pickup_request_phone', 'name' => "pickup_request_phone", 'title' =>  __("Phone")],
+                    ['data' => 'pickup_request_address', 'name' => "pickup_request_address", 'title' =>  __("Adress")],
+                    ['data' => 'pickup_request_note', 'name' => "pickup_request_note", 'title' =>  __("Remarque")],
+                    ['data' => 'action', 'name' => 'action', 'title' => 'Actions', 'orderable' => false, 'searchable' => false],
+                ];
+            @endphp
+                @include('clients.layouts.components.datatable', ['columns' => $columns])
+
+                {{-- <table class="table table-respo has-checkbox align-middle table-row-bordered table-striped table-row-gray-300 fs-6 gy-5 datatable-browse" id="list_pickups">
                     <thead>
                         <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
                             <th class="w-10px pe-2">
@@ -143,10 +165,62 @@
                         </tr>
                     </thead>
                     <tbody class="text-gray-600 fw-semibold" id="list_pickups_body"></tbody>
-                </table>
+                </table> --}}
             </div>
         </div>
     </div>
+       {{-- Modals Add Pickup --}}
+       <div class="modal fade" id="kt_modal_add_pickup" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered mw-650px">
+            <div class="modal-content">
+                <div class="modal-header" id="kt_modal_add_pickup_header">
+                    <h2 class="fw-bold">{{ __("Add Collection") }}</h2>
+                    <div class="btn btn-icon btn-sm btn-active-icon-primary"
+                         data-bs-dismiss="modal">
+                        <i class="ki-outline ki-cross fs-1"></i>
+                    </div>
+                </div>
+                <div class="modal-body px-5 my-7">
+                    <!--begin::Form-->
+                    <form id="kt_modal_add_pickup_form" class="form" action="#">
+                        <div class="d-flex flex-column scroll-y px-5 px-lg-10"
+                            id="kt_modal_add_pickup_scroll" data-kt-scroll="true"
+                            data-kt-scroll-activate="true"
+                            data-kt-scroll-max-height="auto"
+                            data-kt-scroll-dependencies="#kt_modal_add_pickup_header"
+                            data-kt-scroll-wrappers="#kt_modal_add_pickup_scroll"
+                            data-kt-scroll-offset="300px">
+                            <div class="fv-row mb-7">
+                                <label class="required fw-semibold fs-6 mb-2">Full Name</label>
+                                <input type="text" name="user_name"
+                                    class="form-control form-control-solid mb-3 mb-lg-0"
+                                    placeholder="Full name"
+                                    value="Emma Smith" />
+                             
+                            </div>
+                        </div>
+                        <!--end::Scroll-->
+    
+                        <!--begin::Actions-->
+                        <div class="text-center pt-10">
+                            <button type="submit" class="btn btn-primary"
+                                data-kt-users-modal-action="submit">
+                                <span class="indicator-label">
+                                    Submit
+                                </span>
+                                <span class="indicator-progress">
+                                    Please wait... <span
+                                        class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                </span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>
 
 
@@ -155,8 +229,52 @@
 @section('after_js')
     <script src="{{ asset("assets/clients/plugins/custom/datatables/datatables.bundle.js") }}"></script>
     <script src="{{ asset("assets/clients/plugins/custom/datatables/datatable-btns.js") }}"></script>
+    <script src="{{ asset('assets/global/js/vue.js') }}"></script>
 
     <script type="text/javascript">
-
+        $(document).ready(function() {		
+            table = $('.datatable-browse').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url : "{{ route('clients.parcels.from-inventory.load') }}",
+                      complete: function() {
+                       $('.placeholder-loader').removeClass('holder-active');
+                       $('[data-bs-toggle="tooltip"]').tooltip();
+                       addClassToRows();
+                    },
+                    data: function (d) {
+                        d.filters = $('.filter-form').serializeArray().reduce((acc, {name, value}) => ({...acc, [name]: value}),{});
+                    }
+                },
+                columns: {!! json_encode($columns) !!},
+                language: {url: "{{ asset("assets/clients/plugins/custom/datatables/".app()->getLocale().".json") }}"},
+                orderMulti: true,
+                order: [],
+                buttons: ["copy", "excel", "csv", "pdf", "print"],
+                columnDefs: [
+                    {
+                        targets: "_all", 
+                        createdCell: function(td, cellData, rowData, row, col) {
+                            $(td).attr('data-label', this.api().column(col).header().textContent);
+                        }
+                    }
+                ]
+            });
+    
+            
+              $.ajax({
+                url: "{{ route('clients.parcels.load.cities') }}",
+                dataType: 'json',
+                success: function (data) {
+                    $('.cities-select2').select2({
+                        data: data,
+                        placeholder: '{{ __("Ville (tous)") }}',
+                        language: 'fr',
+                        allowClear: true,
+                    });
+                }
+            });
+        });
     </script>
 @endsection
