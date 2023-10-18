@@ -92,12 +92,32 @@
                         <button type="button" class="btn btn-sm  btn-light-success me-3 excel-export" data-bs-toggle="modal" data-bs-target="#export_modal">
                             <i class="ki-outline ki-exit-up fs-2"></i> {{ __("Exporter") }}
                         </button>
+                        <button type="button" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"
+                                data-bs-target="#kt_modal_add_claim">
+                                <i class="ki-outline ki-plus fs-2"></i> {{ __("Add Claim") }}
+                        </button>
                     </div>
                 </div>
             </div>
 
             <div class="card-body pt-0">
-                <table class="table table-respo has-checkbox align-middle table-row-bordered table-striped table-row-gray-300 fs-6 gy-5 datatable-browse" id="list_claims">
+                @php
+                $default_column = [
+                    'visible' => true,
+                    'orderable' => true,
+                    'searchable' => true
+                ];
+                $columns = [
+                                ['data' => 'checkbox', 'orderable' => false, 'searchable' => false],
+                                ['data' => 'claims_object', 'name' => "claims_object", 'title' =>  __("Object")],
+                                ['data' => 'parcel_code', 'name' => "parcel_code", 'title' =>  __("Parcel Code")],
+                                ['data' => 'claims_statut', 'name' => "claims_statut", 'title' =>  __("Action Status")],
+                                ['data' => 'claims_time', 'name' => "claims_time", 'title' =>  __("Creation Date")],
+                                ['data' => 'action', 'name' => 'action', 'title' => 'Actions', 'orderable' => false, 'searchable' => false],
+                            ];
+            @endphp
+                @include('clients.layouts.components.datatable', ['columns' => $columns])
+                {{-- <table class="table table-respo has-checkbox align-middle table-row-bordered table-striped table-row-gray-300 fs-6 gy-5 datatable-browse" id="list_claims">
                     <thead>
                         <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
                             <th class="w-10px pe-2">
@@ -139,10 +159,109 @@
                         </tr>
                     </thead>
                     <tbody class="text-gray-600 fw-semibold" id="list_claims_body"></tbody>
-                </table>
+                </table> --}}
             </div>
         </div>
     </div>
+       {{-- Modals Add Claim --}}
+       <div class="modal fade" id="kt_modal_add_claim" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered mw-650px">
+           <div class="modal-content">
+               <div class="modal-header" id="kt_modal_add_pickup_header">
+                   <h2 class="fw-bold">{{ __("Add Claim") }}</h2>
+                   <div class="btn btn-icon btn-sm btn-active-icon-primary"
+                        data-bs-dismiss="modal">
+                       <i class="ki-outline ki-cross fs-1"></i>
+                   </div>
+               </div>
+               <div class="modal-body px-5 my-7">
+                   <!--begin::Form-->
+                   <form id="kt_modal_add_claim_form" class="form" action="#">
+                       <div class="d-flex flex-column scroll-y px-5 px-lg-10"
+                           id="kt_modal_add_claim_scroll" data-kt-scroll="true"
+                           data-kt-scroll-activate="true"
+                           data-kt-scroll-max-height="auto"
+                           data-kt-scroll-dependencies="#kt_modal_add_claim_header"
+                           data-kt-scroll-wrappers="#kt_modal_add_claim_scroll"
+                           data-kt-scroll-offset="300px">
+                           {{-- <div class="fv-row mb-3">
+                               <div class="col-md-12 col-lg-12">
+                                   <div class="flex-row-fluid mb-8">
+                                       <label class="required form-label">{{ __("Pickups type") }}</label>
+                                           <select class="form-select form-control form-control-solid form-select-sm" name="typeOfPickup" data-control="select2" aria-label="Select example">
+                                               @foreach ($types as $key => $type)
+                                                   <option value="{{$key}}" >{{__($type)}}</option>                                        
+                                               @endforeach
+                                           </select>
+                                   </div>
+                               </div>
+                           </div> --}}
+                           <div class="row">
+                               <div class="col-md-12 col-lg-12">
+                                   <div class="flex-row-fluid mb-8">
+                                       <label class="form-label required">{{ __("Note") }}</label>
+                                       <div class="position-relative">
+                                           <textarea name="note" class="form-control form-control-solid form-control-sm" placeholder="{{ __("Note") }}" data-kt-autosize="true" rows="4">{{ old('note') }}</textarea>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="row">
+                               <div class="col-md-12 col-lg-12">
+                                   <div class="flex-row-fluid mb-8">
+                                       <label class="required form-label">{{ __("Phone Number") }}</label>
+                                           <input class="form-control form-control-solid ps-12 form-control-sm" name="phone"
+                                           placeholder="{{ __("Phone Number") }}" value="{{ old('phone') }}">
+                                       
+                                   </div>
+                               </div>
+                           </div>
+                           {{-- <div class="row">
+                               <div class="col-md-12 col-lg-12">
+                                   <div class="flex-row-fluid mb-8">
+                                       <label class="required form-label">{{ __("City") }}</label>
+                                           <select class="form-select form-control form-control-sm form-control-solid" 
+                                                   data-control="select2" aria-label="Select example" name="city">
+                                               <option>{{ __("City") }}</option>
+                                               @foreach ($cities as $city)
+                                                   <option value="{{$city->name}}"
+                                                       {{ old('city') == $city->name ? 'selected' : '' }}
+                                                       >{{$city->name}}</option>
+                                               @endforeach
+                                           </select>
+                                   </div>
+                               </div>
+                           </div> --}}
+                           <div class="row">
+                               <div class="col-md-12 col-lg-12">
+                                   <div class="flex-row-fluid mb-8">
+                                       <label class="form-label required">{{ __("Address") }}</label>
+                                       <div class="position-relative">
+                                           <textarea name="address" class="form-control form-control-sm form-control-solid form-control-sm" placeholder="{{ __("Address") }}" data-kt-autosize="true" rows="4">{{ old('address') }}</textarea>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                       <!--end::Scroll-->
+                   </div>
+                       <!--begin::Actions-->
+                       <div class="text-center pt-10">
+                           <button type="submit" class="btn btn-primary"
+                               data-kt-users-modal-action="submit">
+                               <span class="indicator-label">
+                                   __{{("Add")}}
+                               </span>
+                               <span class="indicator-progress">
+                                   __{{("Please wait")}}... <span
+                                       class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                               </span>
+                           </button>
+                       </div>
+                   </form>
+               </div>
+           </div>
+       </div>
+   </div>
 
 </div>
 
@@ -151,8 +270,50 @@
 @section('after_js')
     <script src="{{ asset("assets/clients/plugins/custom/datatables/datatables.bundle.js") }}"></script>
     <script src="{{ asset("assets/clients/plugins/custom/datatables/datatable-btns.js") }}"></script>
-
+    <script src="{{ asset('assets/global/js/vue.js') }}"></script>
     <script type="text/javascript">
-
-    </script>
-@endsection
+        $(document).ready(function() {		
+            table = $('.datatable-browse').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url : "{{ route('clients.parcels.from-inventory.load') }}",
+                      complete: function() {
+                       $('.placeholder-loader').removeClass('holder-active');
+                       $('[data-bs-toggle="tooltip"]').tooltip();
+                       addClassToRows();
+                    },
+                    data: function (d) {
+                        d.filters = $('.filter-form').serializeArray().reduce((acc, {name, value}) => ({...acc, [name]: value}),{});
+                    }
+                },
+                columns: {!! json_encode($columns) !!},
+                language: {url: "{{ asset("assets/clients/plugins/custom/datatables/".app()->getLocale().".json") }}"},
+                orderMulti: true,
+                order: [],
+                buttons: ["copy", "excel", "csv", "pdf", "print"],
+                columnDefs: [
+                    {
+                        targets: "_all", 
+                        createdCell: function(td, cellData, rowData, row, col) {
+                            $(td).attr('data-label', this.api().column(col).header().textContent);
+                        }
+                    }
+                ]
+            });
+    
+            
+              $.ajax({
+                url: "{{ route('clients.parcels.load.cities') }}",
+                dataType: 'json',
+                success: function (data) {
+                    $('.cities-select2').select2({
+                        data: data,
+                        placeholder: '{{ __("Ville (tous)") }}',
+                        language: 'fr',
+                        allowClear: true,
+                    });
+                }
+            });
+        });
+    </script>@endsection

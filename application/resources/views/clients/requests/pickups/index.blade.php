@@ -171,7 +171,7 @@
     </div>
        {{-- Modals Add Pickup --}}
        <div class="modal fade" id="kt_modal_add_pickup" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered mw-650px">
+         <div class="modal-dialog modal-dialog-centered mw-650px">
             <div class="modal-content">
                 <div class="modal-header" id="kt_modal_add_pickup_header">
                     <h2 class="fw-bold">{{ __("Add Collection") }}</h2>
@@ -182,7 +182,7 @@
                 </div>
                 <div class="modal-body px-5 my-7">
                     <!--begin::Form-->
-                    <form id="kt_modal_add_pickup_form" class="form" action="#">
+                    <form id="pickup_request_form" class="form" action="{{ route('clients.requests.pickups.store') }}">
                         <div class="d-flex flex-column scroll-y px-5 px-lg-10"
                             id="kt_modal_add_pickup_scroll" data-kt-scroll="true"
                             data-kt-scroll-activate="true"
@@ -190,26 +190,74 @@
                             data-kt-scroll-dependencies="#kt_modal_add_pickup_header"
                             data-kt-scroll-wrappers="#kt_modal_add_pickup_scroll"
                             data-kt-scroll-offset="300px">
-                            <div class="fv-row mb-7">
-                                <label class="required fw-semibold fs-6 mb-2">Full Name</label>
-                                <input type="text" name="user_name"
-                                    class="form-control form-control-solid mb-3 mb-lg-0"
-                                    placeholder="Full name"
-                                    value="Emma Smith" />
-                             
+
+                            <div class="fv-row mb-3">
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="flex-row-fluid mb-8">
+                                        <label class="required form-label">{{ __("Pickups type") }}</label>
+                                            <select class="form-select form-control form-control-solid form-select-sm" name="typeOfPickup" data-control="select2" aria-label="Select example">
+                                                @foreach ($types as $key => $type)
+                                                    <option value="{{$key}}" >{{__($type)}}</option>                                        
+                                                @endforeach
+                                            </select>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="flex-row-fluid mb-8">
+                                        <label class="form-label required">{{ __("Note") }}</label>
+                                        <div class="position-relative">
+                                            <textarea name="note" class="form-control form-control-solid form-control-sm" placeholder="{{ __("Note") }}" data-kt-autosize="true" rows="4">{{ old('note') }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="flex-row-fluid mb-8">
+                                        <label class="required form-label">{{ __("Phone Number") }}</label>
+                                            <input class="form-control form-control-solid form-control-sm" name="phone"
+                                            placeholder="{{ __("Phone Number") }}" value="{{ old('phone') }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="flex-row-fluid mb-8">
+                                        <label class="required form-label">{{ __("City") }}</label>
+                                            <select class="form-select form-control form-control-sm form-control-solid" 
+                                                    data-control="select2" aria-label="Select example" name="city">
+                                                <option>{{ __("City") }}</option>
+                                                @foreach ($cities as $city)
+                                                    <option value="{{$city->id}}"
+                                                        {{ old('city') == $city->id ? 'selected' : '' }}
+                                                        >{{$city->name}}</option>
+                                                @endforeach
+                                            </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="flex-row-fluid mb-8">
+                                        <label class="form-label required">{{ __("Address") }}</label>
+                                        <div class="position-relative">
+                                            <textarea name="address" class="form-control form-control-sm form-control-solid form-control-sm" placeholder="{{ __("Address") }}" data-kt-autosize="true" rows="4">{{ old('address') }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         <!--end::Scroll-->
-    
+                    </div>
                         <!--begin::Actions-->
                         <div class="text-center pt-10">
-                            <button type="submit" class="btn btn-primary"
-                                data-kt-users-modal-action="submit">
+                            <button type="submit" class="btn btn-primary" id="pickup_request_submit">
                                 <span class="indicator-label">
-                                    Submit
+                                    {{__("Enregister")}}
                                 </span>
                                 <span class="indicator-progress">
-                                    Please wait... <span
+                                    {{__("Please wait")}}... <span
                                         class="spinner-border spinner-border-sm align-middle ms-2"></span>
                                 </span>
                             </button>
@@ -233,48 +281,99 @@
 
     <script type="text/javascript">
         $(document).ready(function() {		
-            table = $('.datatable-browse').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: {
-                    url : "{{ route('clients.parcels.from-inventory.load') }}",
-                      complete: function() {
-                       $('.placeholder-loader').removeClass('holder-active');
-                       $('[data-bs-toggle="tooltip"]').tooltip();
-                       addClassToRows();
-                    },
-                    data: function (d) {
-                        d.filters = $('.filter-form').serializeArray().reduce((acc, {name, value}) => ({...acc, [name]: value}),{});
-                    }
-                },
-                columns: {!! json_encode($columns) !!},
-                language: {url: "{{ asset("assets/clients/plugins/custom/datatables/".app()->getLocale().".json") }}"},
-                orderMulti: true,
-                order: [],
-                buttons: ["copy", "excel", "csv", "pdf", "print"],
-                columnDefs: [
-                    {
-                        targets: "_all", 
-                        createdCell: function(td, cellData, rowData, row, col) {
-                            $(td).attr('data-label', this.api().column(col).header().textContent);
-                        }
-                    }
-                ]
-            });
+            // table = $('.datatable-browse').DataTable({
+            //     processing: true,
+            //     serverSide: true,
+            //     ajax: {
+            //         url : "{{ route('clients.parcels.from-inventory.load') }}",
+            //           complete: function() {
+            //            $('.placeholder-loader').removeClass('holder-active');
+            //            $('[data-bs-toggle="tooltip"]').tooltip();
+            //            addClassToRows();
+            //         },
+            //         data: function (d) {
+            //             d.filters = $('.filter-form').serializeArray().reduce((acc, {name, value}) => ({...acc, [name]: value}),{});
+            //         }
+            //     },
+            //     columns: {!! json_encode($columns) !!},
+            //     language: {url: "{{ asset("assets/clients/plugins/custom/datatables/".app()->getLocale().".json") }}"},
+            //     orderMulti: true,
+            //     order: [],
+            //     buttons: ["copy", "excel", "csv", "pdf", "print"],
+            //     columnDefs: [
+            //         {
+            //             targets: "_all", 
+            //             createdCell: function(td, cellData, rowData, row, col) {
+            //                 $(td).attr('data-label', this.api().column(col).header().textContent);
+            //             }
+            //         }
+            //     ]
+            // });
     
-            
-              $.ajax({
-                url: "{{ route('clients.parcels.load.cities') }}",
-                dataType: 'json',
+             // Send Save
+        $('#pickup_request_submit').on('click', function(e) {
+            e.preventDefault();
+            var current_btn = $(this);
+            current_btn.prop('disabled', true);
+            current_btn.data("data-kt-indicator", "on");
+
+            var formData =  new FormData($('#pickup_request_form')[0]);
+
+            console.log(formData);
+            $.ajax({
+                url: '{{ route('clients.requests.pickups.store') }}',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
                 success: function (data) {
-                    $('.cities-select2').select2({
-                        data: data,
-                        placeholder: '{{ __("Ville (tous)") }}',
-                        language: 'fr',
-                        allowClear: true,
+                    current_btn.prop('disabled', false);
+                    current_btn.data("data-kt-indicator", "off");
+                    
+                    Swal.fire({
+                        html: data.message,
+                        icon: data.success ? "success" : "error",
+                        buttonsStyling: !1,
+                        confirmButtonText: "Ok",
+                        customClass: {
+                            confirmButton: "btn font-weight-bold btn-light-primary"
+                        }
+                    });
+
+                    // if(data.success) {
+                    //     setTimeout(function() {
+                    //         location.href = data.redirect
+                    //     }, 1100);
+                        
+                    // }
+                },
+                error: function(data) {
+                    current_btn.prop('disabled', false);
+                    current_btn.data("data-kt-indicator", "off");
+                    Swal.fire({
+                        html: data.responseJSON.message,
+                        icon: "error",
+                        buttonsStyling: !1,
+                        confirmButtonText: "Ok",
+                        customClass: {
+                            confirmButton: "btn font-weight-bold btn-light-primary"
+                        }
                     });
                 }
             });
+        });
+            //   $.ajax({
+            //     url: "{{ route('clients.parcels.load.cities') }}",
+            //     dataType: 'json',
+            //     success: function (data) {
+            //         $('.cities-select2').select2({
+            //             data: data,
+            //             placeholder: '{{ __("Ville (tous)") }}',
+            //             language: 'fr',
+            //             allowClear: true,
+            //         });
+            //     }
+            // });
         });
     </script>
 @endsection
