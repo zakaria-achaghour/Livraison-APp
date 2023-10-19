@@ -12,7 +12,7 @@ class PickupRequest extends Model
 
     protected $table = 'pickup_request';
     protected $primaryKey = 'pickup_request_id';
-    public $timestamps = false;
+    // public $timestamps = false;
 
     protected $casts = [
         'pickup_request_statut' => PickupRequestEnum::class

@@ -204,7 +204,7 @@
         /*const toastElement = document.getElementById('toast');
         const toast = bootstrap.Toast.getOrCreateInstance(toastElement);
         toast.show();*/
-
+ 
 		table = $('.datatable-browse').DataTable({
             processing: true,
             serverSide: true,

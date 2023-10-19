@@ -116,10 +116,10 @@
                     ['data' => 'pickup_request_phone', 'name' => "pickup_request_phone", 'title' =>  __("Phone")],
                     ['data' => 'pickup_request_address', 'name' => "pickup_request_address", 'title' =>  __("Adress")],
                     ['data' => 'pickup_request_note', 'name' => "pickup_request_note", 'title' =>  __("Remarque")],
-                    ['data' => 'action', 'name' => 'action', 'title' => 'Actions', 'orderable' => false, 'searchable' => false],
+                    ['data' => 'action', 'name' => 'action', 'title' => 'action', 'orderable' => false, 'searchable' => false],
                 ];
-            @endphp
-                @include('clients.layouts.components.datatable', ['columns' => $columns])
+            @endphp 
+                 @include('clients.layouts.components.datatable', ['columns' => $columns])
 
                 {{-- <table class="table table-respo has-checkbox align-middle table-row-bordered table-striped table-row-gray-300 fs-6 gy-5 datatable-browse" id="list_pickups">
                     <thead>
@@ -280,12 +280,13 @@
     <script src="{{ asset('assets/global/js/vue.js') }}"></script>
 
     <script type="text/javascript">
-        $(document).ready(function() {		
+        $(document).ready(function() {	
+            // load data	
             // table = $('.datatable-browse').DataTable({
             //     processing: true,
             //     serverSide: true,
             //     ajax: {
-            //         url : "{{ route('clients.parcels.from-inventory.load') }}",
+            //         url : "{{ route('clients.requests.pickups.load') }}",
             //           complete: function() {
             //            $('.placeholder-loader').removeClass('holder-active');
             //            $('[data-bs-toggle="tooltip"]').tooltip();
@@ -309,7 +310,36 @@
             //         }
             //     ]
             // });
-    
+            table = $('.datatable-browse').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url : "{{ route('clients.requests.pickups.load') }}",
+		      	complete: function() {
+			       $('.placeholder-loader').removeClass('holder-active');
+			       $('[data-bs-toggle="tooltip"]').tooltip();
+                   addClassToRows();
+                //    KTMenu.createInstances();
+	        	},
+                data: function (d) {
+                    d.filters = $('.filter-form').serializeArray().reduce((acc, {name, value}) => ({...acc, [name]: value}),{});
+                }
+            },
+            columns: {!! json_encode($columns) !!},
+            language: {url: "{{ asset("assets/clients/plugins/custom/datatables/".app()->getLocale().".json") }}"},
+            /*responsive: true,*/
+            orderMulti: true,
+            order: [],
+            buttons: ["copy", "excel", "csv", "pdf", "print"],
+            columnDefs: [
+                {
+                    targets: "_all", 
+                    createdCell: function(td, cellData, rowData, row, col) {
+                        $(td).attr('data-label', this.api().column(col).header().textContent);
+                    }
+                }
+            ]
+        });
              // Send Save
         $('#pickup_request_submit').on('click', function(e) {
             e.preventDefault();
@@ -319,7 +349,6 @@
 
             var formData =  new FormData($('#pickup_request_form')[0]);
 
-            console.log(formData);
             $.ajax({
                 url: '{{ route('clients.requests.pickups.store') }}',
                 type: 'POST',
@@ -340,12 +369,9 @@
                         }
                     });
 
-                    // if(data.success) {
-                    //     setTimeout(function() {
-                    //         location.href = data.redirect
-                    //     }, 1100);
-                        
-                    // }
+                    if(data.success) {
+                        formData.reset();
+                    }
                 },
                 error: function(data) {
                     current_btn.prop('disabled', false);
@@ -362,18 +388,26 @@
                 }
             });
         });
-            //   $.ajax({
-            //     url: "{{ route('clients.parcels.load.cities') }}",
-            //     dataType: 'json',
-            //     success: function (data) {
-            //         $('.cities-select2').select2({
-            //             data: data,
-            //             placeholder: '{{ __("Ville (tous)") }}',
-            //             language: 'fr',
-            //             allowClear: true,
-            //         });
-            //     }
-            // });
+
+
+    // Add class to rows in mobile view
+    function addClassToRows() {
+            var screenWidth = $(window).width();
+            var isMobileView = screenWidth < 768; // Adjust the breakpoint as needed
+            
+            table.rows().every(function () {
+                var rowNode = this.node();
+                if (isMobileView) {
+                    $(rowNode).addClass('placeholder-loader'); // Add your desired class name
+                } else {
+                    $(rowNode).removeClass('placeholder-loader');
+                }
+            });
+        }
+
+        // Call the function on initial load and window resize
+        $(window).on('resize', addClassToRows);
+
         });
     </script>
 @endsection
