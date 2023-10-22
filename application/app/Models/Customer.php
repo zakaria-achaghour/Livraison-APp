@@ -148,7 +148,9 @@ protected $fillable = [
         }
     }
 
+    public function getCityZone($city_id) {
 
+    }
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ClientResetPassword($token));
