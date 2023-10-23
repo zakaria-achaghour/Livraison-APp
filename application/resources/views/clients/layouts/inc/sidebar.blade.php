@@ -160,6 +160,76 @@
                         <span class="menu-title">{{ __("Liste Factures") }}</span>
                     </a>
                 </div>
+
+                <div class="menu-item menu-labels">
+                    <div class="menu-content d-flex flex-stack fw-bold text-gray-600 text-uppercase fs-7">
+                        <span class="menu-heading ps-1">{{ __("Request") }}</span>
+                    </div>
+                </div>
+
+                <div class="app-sidebar-separator separator mx-4 mb-2"></div>
+                <div class="menu-item">
+                    <a class="menu-link fs-5 fw-bold" href="{{ route('clients.requests.pickups.index') }}">
+                        <span class="menu-icon">
+                            <i class="ki-duotone ki-flag fs-1"><i class="path1"></i><i class="path2"></i><i class="path3"></i></i>
+                        </span>
+                        <span class="menu-title">{{ __("Collection") }}</span>
+                    </a>
+                </div>
+
+                <div class="menu-item">
+                    <a class="menu-link fs-5 fw-bold" href="{{ route('clients.requests.claims.index') }}">
+                        <span class="menu-icon">
+                            <i class="bi bi-exclamation-triangle-fill fs-1"></i>
+                        </span>
+                        <span class="menu-title">{{ __("Claims") }}</span>
+                    </a>
+                </div>
+
+                <div class="menu-item">
+                    <a class="menu-link fs-5 fw-bold" href="#">
+                        <span class="menu-icon">
+                            <i class="ki-duotone ki-pencil  fs-1"><i class="path1"></i><i class="path2"></i><i class="path3"></i></i>
+                        </span>
+                        <span class="menu-title">{{ __("Modification") }}</span>
+                    </a>
+                </div>
+
+                <div class="menu-item menu-labels">
+                    <div class="menu-content d-flex flex-stack fw-bold text-gray-600 text-uppercase fs-7">
+                        <span class="menu-heading ps-1">{{ __("Utilities") }}</span>
+                    </div>
+                </div>
+
+                <div class="app-sidebar-separator separator mx-4 mb-2"></div>
+
+                <div class="menu-item">
+                    <a class="menu-link fs-5 fw-bold" href="{{ route('clients.utilities.users.index') }}">
+                        <span class="menu-icon">
+                            <i class="ki-duotone ki-people   fs-1"><i class="path1"></i><i class="path2"></i><i class="path3"></i></i>
+                        </span>
+                        <span class="menu-title">{{ __("Users") }}</span>
+                    </a>
+                </div>
+
+                <div class="menu-item">
+                    <a class="menu-link fs-5 fw-bold" href="#">
+                        <span class="menu-icon">
+                            <i class="ki-duotone ki-question fs-1"><i class="path1"></i><i class="path2"></i><i class="path3"></i></i>
+                        </span>
+                        <span class="menu-title">{{ __("Support") }}</span>
+                    </a>
+                </div>
+
+                <div class="menu-item">
+                    <a class="menu-link fs-5 fw-bold" href="{{ route('clients.logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                        <span class="menu-icon">
+                            <i class="bi bi-box-arrow-left fs-1"></i>
+                        </span>
+                        <span class="menu-title">{{ __("Logout") }}</span>
+                    </a>
+                  
+                </div>
             </div>
         </div>
     </div>

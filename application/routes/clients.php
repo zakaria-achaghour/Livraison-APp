@@ -128,5 +128,29 @@ Route::prefix('clients')->name('clients.')->group(function () {
             Route::post('update', 'update')->name('delivery-note.update');
             Route::delete('{id}', 'delete')->name('delivery-note.delete');
         });
+
+        // Requests
+        Route::group([
+            'prefix' => '/requests',
+            'as' => 'requests.',
+          ], function () {
+            Route::prefix('pickups')->controller(\App\Http\Controllers\Clients\PickupRequestController::class)->group(function () {
+                Route::get('load', 'load')->name('pickups.load');
+                Route::post('/', 'store')->name('pickups.store');
+                Route::delete('/{id}', 'destroy')->name('pickups.delete');
+                Route::get('/', 'index')->name('pickups.index');
+                // Route::get('/create', 'create')->name('pickups.create');
+            });
+                // Route::resource('pickups', \App\Http\Controllers\Clients\PickupRequestController::class);
+                Route::resource('claims', \App\Http\Controllers\Clients\ClaimRequestController::class);
+          });
+
+          // utilities
+        Route::group([
+            'prefix' => '/utilities',
+            'as' => 'utilities.',
+          ], function () {
+              Route::resource('users', \App\Http\Controllers\Clients\CustomerController::class);
+          });
     });
 });
