@@ -134,5 +134,66 @@ return [
     ],
     'custom_var_ref' => [
         'unique_array' => 'La Valeur du champ :attribute est dupliquée dans le tableau'
+    ],
+
+ /*
+    |--------------------------------------------------------------------------
+    | Custom Validation Attributes
+    |--------------------------------------------------------------------------
+    |
+    | The following language lines are used to swap our attribute placeholder
+    | with something more reader friendly such as "E-Mail Address" instead
+    | of "email". This simply helps us make our message more expressive.
+    |
+    */
+
+    'attributes' => [
+        'name'                  => 'nom',
+        'username'              => 'Nom utilisateur',
+        'email'                 => 'e-mail',
+        'first_name'            => 'prénom',
+        'last_name'             => 'nom',
+        'password'              => 'mot de passe',
+        'password_confirmation' => 'confirmation du mot de passe',
+        'city'                  => 'ville',
+        'country'               => 'pays',
+        'address'               => 'addresse',
+        'phone'                 => 'téléphone',
+        'mobile'                => 'mobile',
+        'age'                   => 'age',
+        'sex'                   => 'sexe',
+        'gender'                => 'sexe',
+        'day'                   => 'jour',
+        'month'                 => 'mois',
+        'year'                  => 'année',
+        'hour'                  => 'heure',
+        'minute'                => 'minute',
+        'second'                => 'seconde',
+        'content'               => 'contenu',
+        'description'           => 'description',
+        'excerpt'               => 'extrait',
+        'date'                  => 'date',
+        'time'                  => 'temps',
+        'available'             => 'disponible',
+        'size'                  => 'taille',
+        'price'                 => 'prix',
+        'desc'                  => 'desc',
+        'title'                 => 'titre',
+        'q'                     => 'البحث',
+        'link'                  => ' ',
+        'slug'                  => ' ',
+        'fullName'              => 'Nom complet',
+        'password'              => 'Mot de passe', 
+        'password_confirmation' => 'confirmation du mot de passe',
+        'storeName'             => 'Nom du magasin',
+        "companyType"           => "Type d'entereprise",
+        'siteWeb'               => 'Site web',
+        'phone'                 => 'Téléphone'
+        // ''                      => '',
+        // ''                      => '',
+        // ''                      => '',
+        // ''                      => '',
+        // ''                      => '',
+        // ''                      => '',
     ]
 ];

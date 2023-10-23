@@ -8,15 +8,27 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Notifications\ClientResetPassword;
 use App\Models\CustomerCode;
+use App\Notifications\ClientEmailVerificationNotification;
 use Carbon\Carbon;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-
-class Customer extends Authenticatable
+class Customer extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $table = 'customers';
     protected $primaryKey = 'customers_id';
+
+
+
+    /**
+ * The attributes that are mass assignable.
+ *
+ * @var array
+ */
+protected $fillable = [
+    'email_verified_at',
+];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -99,25 +111,28 @@ class Customer extends Authenticatable
     }
 
 
-    public function getAttribute($key)
-    {
-        // Check if the key starts with the prefix or if it's a special Eloquent attribute
-        if (array_key_exists($key, $this->attributes)) {
-            return parent::getAttribute($key);
-        }
+    // public function getAttribute($key)
+    // {
+    //     if ($key === 'created_at' || $key === 'updated_at') {
+    //         return null; // Exclude created_at and updated_at
+    //     }
+    //     // Check if the key starts with the prefix or if it's a special Eloquent attribute
+    //     if (array_key_exists($key, $this->attributes)) {
+    //         return parent::getAttribute($key);
+    //     }
 
-        return parent::getAttribute('customers_' . $key);
-    }
+    //     return parent::getAttribute('customers_' . $key);
+    // }
 
-    public function setAttribute($key, $value)
-    {
-        // Check if the key starts with the prefix or if it's a special Eloquent attribute
-        if (array_key_exists($key, $this->attributes)) {
-            return parent::setAttribute($key, $value);
-        }
+    // public function setAttribute($key, $value)
+    // {
+    //     // Check if the key starts with the prefix or if it's a special Eloquent attribute
+    //     if (array_key_exists($key, $this->attributes)) {
+    //         return parent::setAttribute($key, $value);
+    //     }
 
-        return parent::setAttribute('customers_' . $key, $value);
-    }
+    //     return parent::setAttribute('customers_' . $key, $value);
+    // }
 
 
     public function getAvatarLetters() {
@@ -137,5 +152,15 @@ class Customer extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ClientResetPassword($token));
+    }
+
+    /**
+     * Send email verification notice.
+     * 
+     * @return void
+     */
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new ClientEmailVerificationNotification);
     }
 }

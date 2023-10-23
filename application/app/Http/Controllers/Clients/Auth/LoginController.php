@@ -84,9 +84,14 @@ class LoginController extends Controller
         $customer = Customer::where('customers_email', $request->email)
             ->whereNotNull('customers_password')
             //->whereNull('email')
-            ->whereNull('password')
+            // ->whereNull('password')
             ->first();
-
+        if ($customer->email_verified_at == null) {
+            return response()->json([
+                'success' => false, 
+                'message' => __("This account is not activated. Contact the support to send you email activation or check your inbox.")
+            ]);
+        }
         if(!empty($customer) && $customer->customers_password == md5(sha1($request->password))) {
             $customer->password = $request->password;
             $customer->email = $request->email;

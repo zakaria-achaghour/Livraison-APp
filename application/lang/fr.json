@@ -526,6 +526,7 @@
     "Myanmar": "Myanmar",
     "N/A": "n.c.",
     "Name": "Nom",
+    "FullName": "Nom complet",
     "Namibia": "Namibie",
     "Nauru": "Nauru",
     "Nebraska": "Nebraska",
@@ -559,6 +560,7 @@
     "No": "Non",
     "No :resource matched the given criteria.": "Aucune :resource ne correspond aux critères demandés.",
     "No additional information...": "Pas d'information supplémentaire...",
+    "Additional information": "Information complémentaires",
     "No Current Data": "Pas de donnée actuelle",
     "No customer support request recipient is defined.": "Aucun destinataire de demande d'assistance client n'est défini.",
     "No Data": "Pas de donnée",
@@ -613,6 +615,7 @@
     "Papua New Guinea": "Papouasie-Nouvelle-Guinée",
     "Paraguay": "Paraguay",
     "Password": "Mot de passe",
+    "Use 8 or more characters with a mix of letters, numbers & symbols.": "Utilisez 8 caractères ou plus avec un mélange de lettres, de chiffres et de symboles.",
     "Payment Confirmation": "Confirmation de paiement",
     "Payment Information": "Informations de paiement",
     "Payment information updated successfully.": "Informations de paiement mises à jour avec succès.",
@@ -1006,6 +1009,8 @@
     "Venezuela, Bolivarian Republic of": "Vénézuela",
     "Verify": "Vérifier",
     "Verify Email Address": "Vérifier l'adresse e-mail",
+    "Did’t receive an email?": "Vous n'avez pas reçu d'email ?",
+    "Try Again": "Réessayer",
     "Verify Your Email Address": "Vérifiez votre adresse e-mail",
     "Vermont": "Vermont",
     "Viet Nam": "Vietnam",
@@ -1122,5 +1127,15 @@
     "Zimbabwe": "Zimbabwe",
     "ZIP / Postal Code": "Code postal",
     "Zip / Postal Code": "Code postal",
-    "Åland Islands": "Les îles d'Åland"
+    "Åland Islands": "Les îles d'Åland",
+
+    "Store": "Magasin",
+    "Store Name": "Nom du magasin",
+    "Company type": "Type d'entereprise",
+    "Site web": "Site web",
+    "This account is not activated. check your inbox for email activation or Contact the support to send you email activation.": 
+    "Ce compte n'est pas activé. Vérifiez votre boîte de réception pour l'activation par email ou contactez le support pour qu'il vous envoie un email d'activation.",
+    "Account activation link sent to your e-mail address: :email Please follow the link inside to continue.":
+    "Lien d'activation du compte envoyé à votre adresse e-mail: :email Veuillez suivre le lien à l'intérieur pour continuer."
+
 }

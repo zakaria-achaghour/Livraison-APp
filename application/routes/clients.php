@@ -1,8 +1,9 @@
 <?php
 
-
+ 
 Route::prefix('clients')->name('clients.')->group(function () {
-
+    
+    
     Route::get('language/{locale}', [\App\Http\Controllers\GlobalController::class, 'languageSwitch'])->name('language.switch');
     // login
     Route::get('login', [\App\Http\Controllers\Clients\Auth\LoginController::class, 'showLoginForm'])->name('login');
@@ -12,6 +13,9 @@ Route::prefix('clients')->name('clients.')->group(function () {
     // register
     Route::get('register', [\App\Http\Controllers\Clients\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
     Route::post('register', [\App\Http\Controllers\Clients\Auth\RegisterController::class, 'register']);
+  
+
+   
 
     // password reset
     Route::get('password/reset', [\App\Http\Controllers\Clients\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])
@@ -24,13 +28,20 @@ Route::prefix('clients')->name('clients.')->group(function () {
         ->name('password.update');
     Route::get('password/success', [\App\Http\Controllers\Clients\Auth\ResetPasswordController::class, 'success'])
         ->name('password.success');
+ 
+   
+    // Email Verification Routes...
+    Route::get('email/verify', [\App\Http\Controllers\Clients\Auth\VerificationController::class, 'show'])->name('verification.notice');
+    Route::get('email/verify/{id}/{hash}', [\App\Http\Controllers\Clients\Auth\VerificationController::class, 'verify'])->name('verification.verify');
+    Route::get('email/resend', [\App\Http\Controllers\Clients\Auth\VerificationController::class, 'resend'])->name('verification.resend');
 
+ 
     Route::post('email/change', [\App\Http\Controllers\Clients\Auth\VerificationController::class, 'changeEmail'])
         ->name('email.change');
 
 
     // DASHBOARD
-    Route::group(['middleware' => ['auth:clients']], function () {
+    Route::group(['middleware' => ['auth:clients','verified']], function () {
         Route::get('/', [\App\Http\Controllers\Clients\DashboardController::class, 'index'])->name('home');
 
         // Profile

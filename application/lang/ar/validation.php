@@ -156,13 +156,12 @@ return [
 
     'custom' => [
         'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
+            'rule-name' => 'custom-message'
+        ]
     ],
-    ,
     'custom_var_ref' => [
         'unique_array' => 'القيمة لحقل :attribute مُكررة في الجدول'
-    ]
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -210,6 +209,12 @@ return [
         'q'                     => 'البحث',
         'link'                  => ' ',
         'slug'                  => ' ',
-    ],
+        'fullName'              => 'الاسم كامِل',
+        'password'              => 'كلمة مرور', 
+        'password_confirmation' => 'تأكيد كلمة المرور',
+        'storeName'             => 'اسم المتجر',
+        "companyType"           => "نوع الشركة",
+        'siteWeb'               => 'موقع الويب'
+    ]
 
 ];

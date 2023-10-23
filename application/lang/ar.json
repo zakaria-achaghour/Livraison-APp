@@ -528,6 +528,7 @@
     "Myanmar": "ميانمار",
     "N/A": "غير متاح",
     "Name": "الاسم",
+    "FullName": "الاسم كامِل",
     "Namibia": "ناميبيا",
     "Nauru": "ناورو",
     "Nebraska": "نبراسكا",
@@ -561,6 +562,7 @@
     "No": "ﻻ",
     "No :resource matched the given criteria.": ":Resource لا يطابق المعايير المحددة.",
     "No additional information...": "لا توجد معلومات إضافية...",
+    "Additional information": "معلومات إضافية",
     "No Current Data": "لا توجد بيانات حاليا",
     "No customer support request recipient is defined.": "لم يتم تعريف مستلم طلب دعم العملاء.",
     "No Data": "ﻻ توجد بيانات",
@@ -615,6 +617,7 @@
     "Papua New Guinea": "بابوا غينيا الجديدة",
     "Paraguay": "باراغواي",
     "Password": "كلمة المرور",
+    "Use 8 or more characters with a mix of letters, numbers & symbols.": "استخدم 8 أحرف أو أكثر مع مزيج من الأحرف والأرقام و الرموز",
     "Payment Confirmation": "تأكيد عملية الدفع",
     "Payment Information": "معلومات الدفع",
     "Payment information updated successfully.": "تم تحديث معلومات الدفع بنجاح.",
@@ -1008,6 +1011,8 @@
     "Venezuela, Bolivarian Republic of": "فنزويلا",
     "Verify": "تحقق",
     "Verify Email Address": "التحقق من عنوان البريد الإلكتروني",
+    "Try Again": "حاول مرة أخرى ",
+    "Did’t receive an email?": "ألم تتلق بريدا إلكترونيا؟",
     "Verify Your Email Address": "تحقق من عنوان بريدك الإلكتروني",
     "Vermont": "فيرمونت",
     "Viet Nam": "فيتنام",
@@ -1141,6 +1146,7 @@
     "Mot de passe oublié?": "نسيت كلمة المرور؟",
     "Veuillez patienter ...": "يرجى الانتظار...",
     "Vous n'êtes pas utilisateur ? ": "ليس لديك حساب؟ ",
+    "Vous avez déjà un compte ?": "لديك حساب؟ ",
     "S'inscrire": "التسجيل الأن",
     "Re-connexion": "إعادة الاتصال",
     "Connexion": "تسجيل الدخول",
@@ -1152,12 +1158,19 @@
     "Confirmez le mot de passe": "تأكيد كلمة المرور",
     "Félicitations": "تهانينا",
     "Vous pouvez maintenant vous connecter à votre compte avec votre nouveau mot de passe.": "يمكنك الآن تسجيل الدخول إلى حسابك باستخدام كلمة المرور الجديدة.",
-    "Register": "التسجيل",
-    "Name": "الاسم",
-    "Email Address": "عنوان البريد الإلكتروني",
-    "Password": "كلمة المرور",
-    "Confirm Password": "تأكيد كلمة المرور",
     "Vérifier votre adresse e-mail": "التحقق من عنوان بريدك الإلكتروني",
     "Quicklivraison Panel": "لوحة تحكم Quicklivraison",
-    "Vous pouvez commencer à créer facilement vos colis grâce à sa conception conviviale et à sa mise en page réactive la plus complète.": "يمكنك البدء في إنشاء حزمك بسهولة باستخدام تصميمه المستخدم وأكثر تخطيطاته استجابةً وشمولًا."
+    "Vous pouvez commencer à créer facilement vos colis grâce à sa conception conviviale et à sa mise en page réactive la plus complète.": "يمكنك البدء في إنشاء حزمك بسهولة باستخدام تصميمه المستخدم وأكثر تخطيطاته استجابةً وشمولًا.",
+
+
+
+    "Store": "المتجر",
+    "Store Name": "اسم المتجر",
+    "Company type": "نوع الشركة",
+    "Site web": "موقع الويب",
+    "This account is not activated. check your inbox for email activation or Contact the support to send you email activation.":
+    "لم يتم تنشيط هذا الحساب. تحقق من صندوق الوارد الخاص بك لتنشيط البريد الإلكتروني أو اتصل بالدعم لإرسال تنشيط البريد الإلكتروني إليك",
+    "Account activation link sent to your e-mail address: :email Please follow the link inside to continue.": 
+    "م إرسال رابط تنشيط الحساب إلى عنوان بريدك الإلكتروني: :email يرجى اتباع الرابط الموجود بالداخل للمتابعة"
+    
 }

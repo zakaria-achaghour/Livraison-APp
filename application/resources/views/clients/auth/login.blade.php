@@ -3,6 +3,7 @@
 @section('title', __('S\'identifier'))
 
 @section('content')
+
     <form action="{{ route('clients.login') }}" class="form w-100" novalidate="novalidate" id="kt_sign_in_form" method="POST">
         @csrf
 
@@ -28,6 +29,7 @@
                 </a>
             </div>
         </div>
+
 
         <div class="separator separator-content my-14">
             <span class="text-gray-500 fw-semibold fs-7" style="width: 100%;">{{ __("Ou avec votre email") }}</span>
