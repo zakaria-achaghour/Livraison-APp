@@ -16,4 +16,9 @@ class Claim extends Model
     protected $casts = [
         'claims_statut' => ClaimsStatusEnum::class
     ];
+
+    public function messages()
+    {
+       return $this->hasMany(ClaimMessage::class, 'claims_id', 'claims_msg_id');
+    }
 }

@@ -11,6 +11,7 @@ use App\Models\CustomerCode;
 use App\Notifications\ClientEmailVerificationNotification;
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Customer extends Authenticatable implements MustVerifyEmail
 {
@@ -78,6 +79,11 @@ protected $fillable = [
 
     public function newParcels () {
         return $this->hasMany(Parcel::class, 'parcel_customer', 'customers_id')->where('parcel_status', 'NEW_PARCEL');
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'customers_pickup_city', 'id');
     }
 
 

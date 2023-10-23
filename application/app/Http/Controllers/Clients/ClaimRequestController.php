@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Clients;
 use App\Enums\ClaimsStatusEnum;
 use App\Enums\ClaimsTypeEnum;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Clients\Claims\StoreClaimRequest;
 use App\Models\Claim;
+use App\Models\ClaimMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use DataTables;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
 
 class ClaimRequestController extends Controller
 {
@@ -36,9 +39,30 @@ class ClaimRequestController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreClaimRequest $request)
     {
-        
+        $user = Auth::user();
+        $claim = new Claim();
+        $claim->claims_customer = $user->customers_id;
+        $claim->claims_time     = time();
+        $claim->claims_object   = $request->type;
+        $claim->claims_statut   = 1;
+        $claim->parcel_code   = $request->parcelCode;
+        $claim->pickup_zone   = $user->city->zones->first()->zone_id;
+        $claim->save();
+
+        $message = new ClaimMessage();
+        $message->claims_msg_claim = $claim->claims_id;
+        $message->claims_msg_from = 1;
+        $message->claims_msg_from_id = $user->customers_id;
+        $message->claims_msg_time = time();
+        $message->claims_msg_text = $request->message;
+        $message->save();
+
+        return Response::json([
+            'success' => true, 
+            'message' => __('The Claim added succesfully')
+        ]);
     }
 
     /**
@@ -108,13 +132,6 @@ class ClaimRequestController extends Controller
             ->make(true);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        return view("clients.requests.claims.edit");
-    }
 
     /**
      * Update the specified resource in storage.
