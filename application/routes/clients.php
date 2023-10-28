@@ -145,9 +145,10 @@ Route::prefix('clients')->name('clients.')->group(function () {
                 Route::post('/', 'store')->name('claims.store');
                 Route::delete('/{id}', 'destroy')->name('claims.delete');
                 Route::get('/', 'index')->name('claims.index');
+                Route::get('/{id}', 'chat')->name('claims.chat');
+                Route::post('/chat/messages', 'chatMessage')->name('claims.chat.message');
+                Route::get('/chat/message/{id}', 'loadChat')->name('claims.messages.load');
             });
-                // Route::resource('pickups', \App\Http\Controllers\Clients\PickupRequestController::class);
-                // Route::resource('claims', \App\Http\Controllers\Clients\ClaimRequestController::class);
           });
 
           // utilities

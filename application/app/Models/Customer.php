@@ -86,6 +86,11 @@ protected $fillable = [
         return $this->belongsTo(City::class, 'customers_pickup_city', 'id');
     }
 
+    public function messages()
+    {
+        return $this->morphMany(ClaimMessage::class, 'sender', 'claims_msg_from', 'claims_msg_from_id')->where('claims_msg_from', 1);
+    }
+
 
     /*
     ***************

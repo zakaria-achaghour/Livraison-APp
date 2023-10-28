@@ -13,6 +13,17 @@ class ClaimMessage extends Model
 
     public function claim()
     {
-        return $this->belongsTo(Claim::class, 'claims_msg_id', 'claims_id');
+        return $this->belongsTo(Claim::class, 'claims_msg_claim', 'claims_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'claims_msg_from_id', 'users_id');
+    }
+
+    public function sender()
+    {
+        return $this->morphTo('sender', 'claims_msg_from', 'claims_msg_from_id');
+    
     }
 }

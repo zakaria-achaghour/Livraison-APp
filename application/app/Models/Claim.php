@@ -19,6 +19,6 @@ class Claim extends Model
 
     public function messages()
     {
-       return $this->hasMany(ClaimMessage::class, 'claims_id', 'claims_msg_id');
+       return $this->hasMany(ClaimMessage::class, 'claims_msg_claim', 'claims_id')->orderBy('claims_msg_id','desc');
     }
 }

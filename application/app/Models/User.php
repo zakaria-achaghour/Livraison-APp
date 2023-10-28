@@ -44,4 +44,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function messages()
+    {
+       return $this->hasMany(ClaimMessage::class, 'claims_msg_from_id', 'users_id');   
+    }
 }

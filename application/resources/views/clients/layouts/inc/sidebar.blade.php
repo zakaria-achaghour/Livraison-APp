@@ -186,15 +186,6 @@
                     </a>
                 </div>
 
-                <div class="menu-item">
-                    <a class="menu-link fs-5 fw-bold" href="#">
-                        <span class="menu-icon">
-                            <i class="ki-duotone ki-pencil  fs-1"><i class="path1"></i><i class="path2"></i><i class="path3"></i></i>
-                        </span>
-                        <span class="menu-title">{{ __("Modification") }}</span>
-                    </a>
-                </div>
-
                 <div class="menu-item menu-labels">
                     <div class="menu-content d-flex flex-stack fw-bold text-gray-600 text-uppercase fs-7">
                         <span class="menu-heading ps-1">{{ __("Utilities") }}</span>
