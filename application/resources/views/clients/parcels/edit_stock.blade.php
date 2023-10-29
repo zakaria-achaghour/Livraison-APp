@@ -144,7 +144,7 @@ currentUrl = '{{ route('clients.parcels.from-inventory') }}';
                                     </div>
                                 </div>
 
-                                <div class="col-md-12 col-lg-6">
+                                <div class="col-md-12 col-lg-4">
                                     <div class="flex-row-fluid mb-8">
                                         <label class="form-label required">{{ __("Ville") }}</label>
                                         <select class="form-control form-control-solid cities-select2" name="parcel_city">
@@ -153,7 +153,7 @@ currentUrl = '{{ route('clients.parcels.from-inventory') }}';
                                     </div>
                                 </div>
 
-                                <div class="col-md-12 col-lg-6">
+                                <div class="col-md-12 col-lg-8">
                                     <div class="flex-row-fluid mb-8">
                                         <label class="form-label">{{ __("Tarifs") }}</label>
                                         <div class="input-group">

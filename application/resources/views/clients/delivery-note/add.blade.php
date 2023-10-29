@@ -68,6 +68,203 @@
                 <div class="card-body pb-2">
                     
 
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="card mb-5">
+                                <div class="card-header border-3 bg-success">
+                                    <h3 class="card-title align-items-start flex-column">
+                                        <span class="card-label fw-bold text-white">{{ __('New Colis') }}</span>
+                                    </h3>
+                                </div>
+                                <div class="card-body scroll hover-scroll-y vh-75">
+                                    <div class="d-flex align-items-center justify-content-center h-100" v-if="all.is_loading">
+                                        <div style="text-align: center;">
+                                            <div class="h-80px">
+                                                <span class="loader"></span>    
+                                            </div>
+                                            
+                                            <h6 class="text-center">{{ __("Veuillez patienter") }}</h6>
+                                        </div>
+                                    </div>
+                                    {{-- <div v-else-if="all.products.length == 0"> --}}
+                                    <div v-else-if="all.colis.length == 0">
+                                        <div class="d-flex align-items-center justify-content-center h-100">
+                                            <div style="text-align: center;">
+                                                <i class="ki-duotone ki-information-4 mb-4" style="font-size: 6rem">
+                                                    <i class="path1"></i>
+                                                    <i class="path2"></i>
+                                                    <i class="path3"></i>
+                                                </i>
+                                                <h6 class="text-center">{{ __("No parcels") }}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <template v-else>
+                                        <table class="table table-striped table-respo table-row-bordered table-row-gray-300 align-middle">
+                                            <tbody>
+                                                <tr v-for="parcel in all.parcels">
+                                                    <td data-label="{{ __('Produit') }}">
+                                                        <div class="d-flex justify-content-center justify-content-md-start align-items-center">
+                                                            <div class="symbol symbol-60px me-3">
+                                                                {{-- <div class="symbol-label" :style="{
+                                                                    backgroundImage: 'url({{ asset('images/inventory')}}/'+encodeURIComponent(product.product_pic) +')'}" v-if="product.product_pic != ''"></div>
+                                                                <div class="symbol-label image-input-placeholder" v-else></div> --}}
+
+                                                                Image
+                                                            </div>
+
+                                                            <div class="d-flex flex-column justify-content-center">
+                                                                <span class="text-gray-800 fw-bold fs-6">
+                                                                    @{{ product.product_name }}
+                                                                </span>
+                                                                <span class="badge badge-success fs-8" v-if="product.product_variant == 1">
+                                                                    {{ __("Produit avec variantes") }}
+                                                                </span>
+                                                                <span class="badge badge-primary fs-8" v-else>
+                                                                    {{ __("Produit simple") }}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    {{-- <td data-label="{{ __('Stock') }}">
+                                                        <template v-for="inventory in product.avalaible_inventory">
+                                                            <div class="d-flex align-items-center flex-stack flex-wrap flex-row-fluid d-grid gap-2" >
+                                                                <div class="">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="me-5">
+                                                                            <span class="text-gray-800 fw-bold text-hover-primary fs-7">
+                                                                                #@{{ inventory.inventory_var_name }} 
+                                                                            </span>
+                                                                            <span class="text-gray-400 fw-semibold fs-8 d-block text-start ps-0">@{{ inventory.inventory_ref }}</span>           
+                                                                        </div>
+
+                                                                        <div class="pulse-success">
+                                                                            <span class="pulse-ring" style="top:-25%"></span>
+                                                                            <span class="badge badge-light-success fs-4 me-1">x@{{ inventory.inventory_qty }}</span>
+                                                                            
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                                <div class="d-flex align-items-center"> 
+                                                                    <button class="btn btn-icon btn-success btn-sm border-0" @click="add($event, inventory)" :disabled="inventory.is_adding == 1">
+                                                                        
+                                                                        <span class="indicator-label" v-if="inventory.is_adding == 0">
+                                                                            <i class="ki-outline ki-plus text-white"></i>
+                                                                        </span>
+                                                                        <span class="indicator-progress d-block" v-if="inventory.is_adding == 1">
+                                                                            <span class="spinner-border spinner-border-sm align-middle"></span>
+                                                                        </span>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="separator mb-2 border-3"></div>    
+                                                        </template>
+                                                        
+                                                    </td> --}}
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </template>       
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="card mb-5">
+                                <div class="card-header border-3 bg-danger">
+                                    <h3 class="card-title align-items-start flex-column">
+                                        <span class="card-label fw-bold text-white">{{ __("Liste des produits affectés à ce colis") }}</span>
+                                    </h3>
+                                </div>
+                                <div class="card-body scroll hover-scroll-y vh-75">
+                                    <div class="d-flex align-items-center justify-content-center h-100" v-if="parcel.is_loading">
+                                        <div style="text-align: center;">
+                                            <div class="h-80px">
+                                                <span class="loader"></span>    
+                                            </div>
+                                            
+                                            <h6 class="text-center">{{ __("Veuillez patienter") }}</h6>
+                                        </div>
+                                    </div>
+                                    <div v-else-if="parcel.products.length == 0">
+                                        <div class="d-flex align-items-center justify-content-center h-100">
+                                            <div style="text-align: center;">
+                                                <i class="ki-duotone ki-information-4 mb-4" style="font-size: 6rem">
+                                                    <i class="path1"></i>
+                                                    <i class="path2"></i>
+                                                    <i class="path3"></i>
+                                                </i>
+                                                <h6 class="text-center">{{ __("Aucun produit affecté à ce colis") }}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <template v-else>
+                                        <table class="table table-striped table-respo table-row-bordered table-row-gray-300 align-middle">
+                                            <tbody>
+                                                <tr v-for="product in parcel.products">
+                                                    <td data-label="{{ __('Produit') }}">
+                                                        <div class="d-flex justify-content-center justify-content-md-start align-items-center">
+                                                            <div class="symbol symbol-60px me-3">
+                                                                <div class="symbol-label" :style="{
+                                                                    backgroundImage: 'url({{ asset('images/inventory')}}/'+encodeURIComponent(product.product_pic) +')'}" v-if="product.product_pic != ''"></div>
+                                                                <div class="symbol-label image-input-placeholder" v-else></div>
+                                                            </div>
+
+                                                            <div class="d-flex flex-column justify-content-center">
+                                                                <span class="text-gray-800 fw-bold fs-6">
+                                                                    @{{ product.product_name }}
+                                                                </span>
+                                                                <span class="badge badge-success fs-8" v-if="product.product_variant == 1">
+                                                                    {{ __("Produit avec variantes") }}
+                                                                </span>
+                                                                <span class="badge badge-primary fs-8" v-else>
+                                                                    {{ __("Produit simple") }}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td data-label="{{ __('Quantité Affecté') }}">
+                                                        <template v-for="inventory in product.inventory">
+                                                            <div class="d-flex align-items-center flex-stack flex-wrap flex-row-fluid d-grid gap-2" >
+                                                                <div class="">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="me-5">
+                                                                            <span class="text-gray-800 fw-bold text-hover-primary fs-7">
+                                                                                #@{{ inventory.inventory_var_name }} 
+                                                                            </span>
+                                                                            <span class="text-gray-400 fw-semibold fs-8 d-block text-start ps-0">@{{ inventory.inventory_ref }}</span>           
+                                                                        </div>
+
+                                                                        <div class="">
+                                                                            <span class="badge badge-light-danger fs-4 me-1">x@{{ inventory.affected_content.length }}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                                <div class="d-flex align-items-center"> 
+                                                                    <button class="btn btn-icon btn-danger btn-sm border-0" @click="remove($event, inventory)" :disabled="inventory.is_removing == 1">
+                                                                        <span class="indicator-label" v-if="inventory.is_removing == 0">
+                                                                            <i class="ki-outline ki-minus text-white"></i>
+                                                                        </span>
+                                                                        <span class="indicator-progress d-block" v-if="inventory.is_removing == 1">
+                                                                            <span class="spinner-border spinner-border-sm align-middle"></span>
+                                                                        </span>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="separator mb-2 border-3"></div>    
+                                                        </template>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </template>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="card-footer py-6">
