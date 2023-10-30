@@ -78,7 +78,7 @@ protected $fillable = [
     }
 
     public function newParcels () {
-        return $this->hasMany(Parcel::class, 'parcel_customer', 'customers_id')->where('parcel_status', 'NEW_PARCEL');
+        return $this->hasMany(Parcel::class, 'parcel_customer', 'customers_id')->where('parcel_status', ['NEW_PARCEL', 'WAITING_PICKUP']);
     }
 
     public function city()

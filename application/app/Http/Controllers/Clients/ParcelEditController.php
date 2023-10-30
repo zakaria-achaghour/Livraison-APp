@@ -13,7 +13,7 @@ use App\Models\ParcelEdit;
 class ParcelEditController extends Controller
 {
     public function editRequest(Request $request, $id) {
-        $parcel = Parcel::where('parcel_id', $id)->where('parcel_customer', $request->user()->id)->first();
+        $parcel = Parcel::where('parcel_id', $id)->where('parcel_customer', $request->user()->customers_id)->first();
 
         if(!empty($parcel) && $parcel->canBeEdited()) {
             $parcelEditObject = new \stdClass();

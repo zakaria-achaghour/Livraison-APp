@@ -27,7 +27,7 @@ class ParcelController extends Controller
     }
 
     public function edit(Request $request, $id) {
-        $parcel = Parcel::where('parcel_id', $id)->where('parcel_customer', $request->user()->id)->first();
+        $parcel = Parcel::where('parcel_id', $id)->where('parcel_customer', $request->user()->customers_id)->first();
 
         if(empty($parcel) || $parcel->parcel_status != 'NEW_PARCEL')
             abort(404);
@@ -223,7 +223,7 @@ class ParcelController extends Controller
         }
         $parcel->parcel_situation = 'NOT_PAID';
         $parcel->parcel_status = 'NEW_PARCEL';
-        $parcel->parcel_customer = $user->id;
+        $parcel->parcel_customer = $user->customers_id;
         $parcel->parcel_time = time();
         $parcel->save();
         $parcel->addParcelHistory(0, "NOT_PAID", "NEW_PARCEL", 0);
@@ -359,7 +359,7 @@ class ParcelController extends Controller
 
     public function delete(Request $request, $id) {
         $user = $request->user();
-        $parcel = Parcel::where('parcel_id', $id)->where('parcel_customer', $user->id)->first();
+        $parcel = Parcel::where('parcel_id', $id)->where('parcel_customer', $user->customers_id)->first();
 
         if(empty($parcel)) {
             return Response::json(['success' => false, 'message' => __('Colis introuvable')]);
@@ -383,7 +383,7 @@ class ParcelController extends Controller
     }
 
     public function load(Request $request) {
-        $data = Parcel::select("*")->with('city')->where('parcel_customer', \Auth()->user()->id)->whereNotIn('parcel_status', ['NEW_PARCEL', 'WAITING_PICKUP']);
+        $data = Parcel::select("*")->with('city')->where('parcel_customer', \Auth()->user()->customers_id)->whereNotIn('parcel_status', ['NEW_PARCEL', 'WAITING_PICKUP']);
 
         if(!$request->get('order')) {
             $data->orderBy('parcel_time', 'desc');

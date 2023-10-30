@@ -2,19 +2,33 @@
 
 namespace App\Http\Controllers\Clients;
 
+use App\Enums\ParcelStatusEnum;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DataTables;
 use App\Models\DeliveryNote;
+use App\Repositories\ParcelsRepository;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 
 class DeliveryNoteController extends Controller
 {
+
+    private $parcelsRepository;
+
+    public function __construct(ParcelsRepository $parcelsRepository)
+    {
+        $this->parcelsRepository = $parcelsRepository;
+    }
+
     public function index(Request $request) {
         return view('clients.delivery-note.index');
     }
 
     public function add(Request $request) {
-        return view('clients.delivery-note.add');
+        $parcels = $this->parcelsRepository->getNewAndWitingParcels(Auth::id(), [ParcelStatusEnum::NEW_PARCEL, ParcelStatusEnum::WAITING_PICKUP], 0);
+    
+        return view('clients.delivery-note.add', ['parcelsCount' => $parcels->count()]);
     }
 
     public function load(Request $request) {
@@ -105,5 +119,11 @@ class DeliveryNoteController extends Controller
             ->orderColumn('delivery_note_ref', function ($query, $order) {$query->orderBy('parcel_code', $order);})
             ->rawColumns(['checkbox', 'delivery_note_ref', 'delivery_note_time', 'delivery_note_delivered', 'delivery_parcels',  'action'])
             ->make(true);
+    }
+
+    public function parcelsLoad() {
+        $parcels = $this->parcelsRepository->getNewAndWitingParcels(Auth::id(), [ParcelStatusEnum::NEW_PARCEL, ParcelStatusEnum::WAITING_PICKUP], 0);
+    
+        return Response::json(['parcels' => $parcels]);
     }
 }

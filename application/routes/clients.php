@@ -127,6 +127,7 @@ Route::prefix('clients')->name('clients.')->group(function () {
             Route::get('edit/{id}', 'edit')->name('delivery-note.edit');
             Route::post('update', 'update')->name('delivery-note.update');
             Route::delete('{id}', 'delete')->name('delivery-note.delete');
+            Route::get('parcels/load', 'parcelsLoad')->name('delivery-note.parcels.load');
         });
 
         // Requests

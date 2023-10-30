@@ -15,7 +15,7 @@ class ParcelStockController extends Controller
 
     public function load(Request $request) {
         $data = Parcel::select("*")->with('city')
-            ->where('parcel_customer', \Auth()->user()->id)
+            ->where('parcel_customer', \Auth()->user()->customers_id)
             ->where('parcel_from_stock', 1)
             ->whereIn('parcel_status', ['NEW_PARCEL', 'WAITING_PICKUP']);
 

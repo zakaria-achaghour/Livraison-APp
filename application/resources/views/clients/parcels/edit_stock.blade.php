@@ -256,7 +256,7 @@ currentUrl = '{{ route('clients.parcels.from-inventory') }}';
                                         </div>
                                     </div>
                                     <template v-else>
-                                        <table class="table table-striped table-respo table-row-bordered table-row-gray-300 align-middle">
+                                       <table class="table table-striped table-respo table-row-bordered table-row-gray-300 align-middle">
                                             <tbody>
                                                 <tr v-for="product in all.products">
                                                     <td data-label="{{ __('Produit') }}">
@@ -440,7 +440,7 @@ currentUrl = '{{ route('clients.parcels.from-inventory') }}';
 <script type="module">
     const { createApp } = Vue;
     console.warn = () => {};
-
+ 
     createApp({
         data() {
             return {
@@ -711,7 +711,8 @@ currentUrl = '{{ route('clients.parcels.from-inventory') }}';
                     autoUnmask: true,
                     allowMinus: false
                 }).mask("#price_inputmask");
-            }/*,
+            }
+            /*,
             increment_inventory : function(inventory_s) {
                 for(product in this.all.products) {
                     for(inventory in product.inventory) {
