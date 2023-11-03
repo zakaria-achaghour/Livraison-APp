@@ -127,6 +127,7 @@ Route::prefix('clients')->name('clients.')->group(function () {
             Route::get('edit/{id}', 'edit')->name('delivery-note.edit');
             Route::post('update', 'update')->name('delivery-note.update');
             Route::delete('{id}', 'delete')->name('delivery-note.delete');
+            Route::get('parcels/load', 'parcelsLoad')->name('delivery-note.parcels.load');
         });
 
         // Requests
@@ -139,10 +140,16 @@ Route::prefix('clients')->name('clients.')->group(function () {
                 Route::post('/', 'store')->name('pickups.store');
                 Route::delete('/{id}', 'destroy')->name('pickups.delete');
                 Route::get('/', 'index')->name('pickups.index');
-                // Route::get('/create', 'create')->name('pickups.create');
             });
-                // Route::resource('pickups', \App\Http\Controllers\Clients\PickupRequestController::class);
-                Route::resource('claims', \App\Http\Controllers\Clients\ClaimRequestController::class);
+            Route::prefix('claims')->controller(\App\Http\Controllers\Clients\ClaimRequestController::class)->group(function () {
+                Route::get('load', 'load')->name('claims.load');
+                Route::post('/', 'store')->name('claims.store');
+                Route::delete('/{id}', 'destroy')->name('claims.delete');
+                Route::get('/', 'index')->name('claims.index');
+                Route::get('/{id}', 'chat')->name('claims.chat');
+                Route::post('/chat/messages', 'chatMessage')->name('claims.chat.message');
+                Route::get('/chat/message/{id}', 'loadChat')->name('claims.messages.load');
+            });
           });
 
           // utilities

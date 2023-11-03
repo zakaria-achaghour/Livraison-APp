@@ -45,13 +45,6 @@ currentUrl = '{{ route('clients.parcels.waiting-pick-up') }}';
                         {{ __("Modifier Colis") }} </li>
                 </ul>
             </div>
-
-            {{-- <div class="d-flex align-self-center flex-center flex-shrink-0">
-                <a href="{{ route('clients.parcels.add') }}" class="btn btn-sm btn-success d-flex flex-center ms-3 px-4 py-3">
-                    <i class="ki-outline ki-plus-square fs-2"></i>
-                    <span>{{ __("Nouveau Colis") }}</span>
-                </a>
-            </div> --}}
         </div>
     </div>
 
@@ -136,7 +129,7 @@ currentUrl = '{{ route('clients.parcels.waiting-pick-up') }}';
                             </div>
                         </div>
 
-                        <div class="col-md-12 col-lg-6">
+                        <div class="col-md-12 col-lg-4">
                             <div class="flex-row-fluid mb-8">
                                 <label class="form-label required">{{ __("Ville") }}</label>
                                 <select class="form-control form-control-solid cities-select2" name="parcel_city">
@@ -145,7 +138,7 @@ currentUrl = '{{ route('clients.parcels.waiting-pick-up') }}';
                             </div>
                         </div>
 
-                        <div class="col-md-12 col-lg-6">
+                        <div class="col-md-12 col-lg-8">
                             <div class="flex-row-fluid mb-8">
                                 <label class="form-label">{{ __("Tarifs") }}</label>
                                 <div class="input-group">

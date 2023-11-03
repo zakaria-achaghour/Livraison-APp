@@ -1159,5 +1159,15 @@
     "Creation Date": "Date de création",
     "Parcel Code": "Code d'envoi",
     "Modification": "Modification",
-    "Utilities": "Utilitaires"
+    "Utilities": "Utilitaires",
+    "Urgent Delivery":"Livraison urgente",
+    "Request Another Attempt":"Demande d'une nouvelle tentative",
+    "Price Change":"Changement de prix",
+    "Number Change":"Changement de numéro",
+    "Change Of Recipient":"Changement de destinataire",
+    "Update Delay":"Délai de mise à jour",
+    "Cancel Request":"Annulation de la demande",
+    "Team Response Pending": "Réponse de l'équipe en attente",
+    "Waiting For Customer Response": "En attente de la réponse du client",
+    "Claim Processed": "Réclamation traitée"
 } 

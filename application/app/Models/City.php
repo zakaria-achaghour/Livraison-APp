@@ -15,8 +15,15 @@ class City extends Model
      * @var string
      */
     protected $table = 'cities';
+    protected $primaryKey = 'id';
 
-     public function zones() {
+
+    public function zones() {
         return $this->belongsToMany(Zone::class, 'zone_cities', 'zone_cities_city_id', 'zone_cities_zone_id');
+    }
+
+    public function customers()
+    {
+       return $this->hasMany(Customer::class, 'id', 'customers_pickup_city');
     }
 }

@@ -76,7 +76,7 @@ class RegisterController extends Controller
         $customer->customers_store = $request->storeName;
         $customer->customers_phone = $request->phone;
         $customer->customers_address = $request->address;
-        $customer->customers_city = $request->city;
+        $customer->customers_pickup_city = $request->city;
         $customer->customers_website = $request->webSite;
         $customer->customers_company_type = $request->companyType;
         $customer->customers_cin = $request->cine;
