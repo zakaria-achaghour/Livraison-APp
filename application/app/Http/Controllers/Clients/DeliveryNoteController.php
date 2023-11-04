@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Clients;
 
 use App\Enums\ParcelStatusEnum;
+use App\Enums\TrackingReceiptStatusEnum;
+use App\Enums\TrackingReceiptTypeEnum;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DataTables;
 use App\Models\DeliveryNote;
+use App\Repositories\DeliveryNoteRepository;
 use App\Repositories\ParcelsRepository;
+use App\Repositories\TrackingReceiptRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 
@@ -15,10 +19,17 @@ class DeliveryNoteController extends Controller
 {
 
     private $parcelsRepository;
+    private $deliveryNoteRepository;
+    private $trackingReceiptRepository;
 
-    public function __construct(ParcelsRepository $parcelsRepository)
+    public function __construct(
+        ParcelsRepository $parcelsRepository,
+        DeliveryNoteRepository $deliveryNoteRepository,
+        TrackingReceiptRepository $trackingReceiptRepository)
     {
         $this->parcelsRepository = $parcelsRepository;
+        $this->deliveryNoteRepository = $deliveryNoteRepository;
+        $this->trackingReceiptRepository = $trackingReceiptRepository;
     }
 
     public function index(Request $request) {
@@ -125,5 +136,28 @@ class DeliveryNoteController extends Controller
         $parcels = $this->parcelsRepository->getNewAndWitingParcels(Auth::id(), [ParcelStatusEnum::NEW_PARCEL, ParcelStatusEnum::WAITING_PICKUP], 0);
     
         return Response::json(['parcels' => $parcels]);
+    }
+
+    public function save(Request $request ) {
+        $customerId = Auth::id();
+        $deliveryNote = new DeliveryNote();
+        $deleiverynote->delivery_note_customer = $customerId;
+        $deleiverynote->delivery_note_time = time();
+        $deleiverynote->delivery_note_delivered = 0;
+        $deleiverynote->save();
+
+        $deleiveryNoteRef = $this->deliveryNoteRepository->generateDeliveryNoteRef($customerId, $deleiverynote->delivery_note_id);
+
+        $deleiverynote->delivery_note_ref = $deleiveryNoteRef;
+        $deleiverynote->save();
+
+        // $new_dn_id,'delivery_note','Nouveau',2,0
+        $this->trackingReceiptRepository->saveTrackingReceipt(
+            $deleiverynote->delivery_note_id,
+            TrackingReceiptTypeEnum::DELIVERY_NOTE,
+            TrackingReceiptStatusEnum::NEW,
+            2,
+            0
+        );
     }
 }

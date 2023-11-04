@@ -138,7 +138,7 @@
                                                     <td data-label="{{ __('Actions') }}">
                                                         <div class="d-flex align-items-center"> 
                                                             <button class="btn btn-icon btn-success btn-sm border-0"
-                                                             {{-- @click="add($event, inventory)" :disabled="inventory.is_adding == 1" --}}
+                                                             @click="check($event, parcel)" :disabled="parcels.isAdding == 1"
                                                              >
                                                                 
                                                                 <span class="indicator-label" v-if="parcels.isAdding == 0">
@@ -188,8 +188,68 @@
                                     </div>
                                 </div>
                                 <template v-else>
-                                    
+                                    <table class="table table-striped table-respo table-row-bordered table-row-gray-300 align-middle table-row-gray-300 fs-6 gy-5 datatable-browse">
+                                        <tbody>
+                                            <tr v-for="parcel in deliveryNote.parcels">
+                                                <td data-label="{{ __('Parcels') }}">
+                                                    <div class="d-flex justify-content-center justify-content-md-start align-items-center">
+
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            <b class="text-uppercase placeholder-loader"> @{{ parcel.parcel_code }}</b>
+                                                            @{{parcel.parcel_amana_code == 1 ?'<br/>'. parcel.parcel_amana_code: ''}}<br/>
+                                                            <br/><span class="badge badge-info placeholder-loader"><i class="ki-solid ki-cube-2 text-white me-1"></i>{{__('Normal')}} </span>
+                                                            <span class="badge badge-warning me-1 placeholder-loader" v-if="parcel.parcel_replace == 1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ __('Colis à remplacer') }}">
+                                                                <i class="ki-solid ki-arrow-right-left text-white"></i>
+                                                              </span>
+                                                              
+                                                              <span class="badge badge-primary placeholder-loader" v-if="parcel.parcel_edited == 1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ __('Colis a été modifié') }}">
+                                                                <i class="ki-solid ki-pencil text-white"></i>
+                                                              </span>
+                                                           </div>
+                                                    </div>
+                                                </td>
+                                                <td data-label="{{ __('Reciver') }}">
+                                                
+                                                        <div class="d-flex align-items-center justify-content-center justify-content-md-start">
+
+                                                                <div class="symbol symbol-circle symbol-40px me-2 placeholder-loader">
+                                                                    <div class="symbol-label fs-5 fw-semibold bg-success text-inverse-success">@{{ getAvatarLetters(parcel.parcel_receiver) }}</div>
+                                                                </div>
+                                                                <div class="">
+                                                                    <span class="text-gray-700 fw-bold text-hover-primary fs-8 placeholder-loader">@{{ parcel.parcel_receiver }}</span>
+                                                                    <span class="text-gray-400 fw-semibold fs-7 d-block ps-0 placeholder-loader">@{{ parcel.parcel_phone }}</span> 
+                                                                    <span class="text-gray-800 fs-7 d-block ps-0 placeholder-loader">@{{ parcel.city.name }}</span>  
+                                                                </div>
+                                                        </div>
+                                                        <div class="separator mb-2 border-3"></div>    
+                                                   
+                                                    
+                                                </td>
+
+                                                <td data-label="{{ __('Actions') }}">
+                                                    <div class="d-flex align-items-center"> 
+                                                        <button class="btn btn-icon btn-success btn-sm border-0"
+                                                         @click="unCheck($event, parcel)"
+                                                         >
+                                                            
+                                                            <span class="indicator-label" v-if="parcels.isAdding == 0">
+                                                                <i class="ki-outline ki-minus text-white"></i>
+                                                            </span>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </template>  
+                            </div>
+                            <div class="card-footer">
+                                <div class="d-flex align-items-center"> 
+                                    <button class="btn btn-icon btn-success btn-sm border-0"
+                                     @click="generateDeliveryNote($event)"
+                                     >{{__("Generate Delivery Note")}}
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
@@ -233,6 +293,7 @@
                 },
                 deliveryNote : {
                     isLoading : true,
+                    isSaving: false,
                     isError : false,
                     parcels : []
                 }
@@ -274,6 +335,73 @@
                 } else {
                     return (names[0].substring(0, 1) + names[1].substring(0, 1)).toUpperCase();
                 }
+            },
+            check : function(event, parcel) {
+                event.preventDefault();
+                this.parcels.parcels.isAdding = 1;
+                var global_this = this;
+                console.log("check");
+                const index = this.parcels.parcels.indexOf(parcel);
+                if (index !== -1) {
+                    this.parcels.parcels.splice(index, 1);
+                    // Add the parcel to deliveryNote.parcels
+                    this.deliveryNote.parcels.push(parcel);
+                }
+            },
+            unCheck : function(event, parcel) {
+                event.preventDefault();
+                var global_this = this;
+                // Remove the parcel from deliveryNote.parcels
+                const index = this.deliveryNote.parcels.indexOf(parcel);
+                if (index !== -1) {
+                    this.deliveryNote.parcels.splice(index, 1);
+                    // Add the parcel back to parcels.parcels
+                    this.parcels.parcels.push(parcel);
+                }
+            },
+            generateDeliveryNote: function(event) {
+                event.preventDefault();
+                $.ajax({
+                    url: "{{ route('clients.delivery-note.save') }}",
+                    type: 'POST',
+                    data : {
+                        inventory_id : inventory.inventory_id,
+                        parcel_id : this.current_parcel
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        deliveryNote.isSaving = 1;
+
+                        if(data.success) {
+                            global_this.parcel_products();
+                            inventory.inventory_qty = inventory.inventory_qty - 1;
+                        }
+                        else {
+                            Swal.fire({
+                                html: data.message,
+                                icon: "error",
+                                buttonsStyling: !1,
+                                confirmButtonText: "Ok",
+                                customClass: {
+                                    confirmButton: "btn font-weight-bold btn-light-primary"
+                                }
+                            });
+                        }
+                    },
+                    error: function() {
+                        deliveryNote.isSaving = 0;
+
+                        Swal.fire({
+                            html: '{{ __("Une erreur est survenue. Veuillez réessayer à nouveau.") }}',
+                            icon: "error",
+                            buttonsStyling: !1,
+                            confirmButtonText: "Ok",
+                            customClass: {
+                                confirmButton: "btn font-weight-bold btn-light-primary"
+                            }
+                        });
+                    }
+                });
             }
         }
     }).mount('#parcel_form');
